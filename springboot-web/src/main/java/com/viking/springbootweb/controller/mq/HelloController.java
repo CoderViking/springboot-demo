@@ -1,4 +1,4 @@
-package com.viking.springbootweb.controller;
+package com.viking.springbootweb.controller.mq;
 
 import com.viking.springbootmq.hello.Hello;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by Viking on 2019/9/16
  */
 @RestController
+@RequestMapping("/mq")
 public class HelloController {
 
     @RequestMapping("/")
