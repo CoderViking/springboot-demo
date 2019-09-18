@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by Viking on 2019/9/17
+ * Direct Exchange
  */
 @Configuration
 public class RabbitConfig {

@@ -5,14 +5,14 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
 /**
- * Created by Viking on 2019/9/17
+ * Created by Viking on 2019/9/18
+ * 消息队列-消费者
  */
 @Component
-@RabbitListener(queues = "hello")
-public class HelloReceiver {
+@RabbitListener(queues = "topic.messages")
+public class TopicReceiver2 {
     @RabbitHandler
     public void process(String hello) {
-        System.out.println("Receiver  : " + hello);
+        System.out.println("topicReceiver2  : " + hello);
     }
-
 }
