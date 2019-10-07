@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ada0bea3-f99c-4350-afeb-177a48246757" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/config/RabbitConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/config/RabbitConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/hello/Hello.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/hello/Hello.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/receiver/HelloReceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/receiver/HelloReceiver1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/sender/HelloSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/sender/HelloSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot-mq/src/test/java/com/viking/springbootmq/SpringbootMqApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/springboot-mq/src/test/java/com/viking/springbootmq/SpringbootMqApplicationTests.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -23,34 +18,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/receiver/HelloReceiver1.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/config/RabbitConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/receiver/FanoutReceiverC.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+            <state relative-caret-position="285">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,8 +32,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/springboot-mq/src/test/java/com/viking/springbootmq/SpringbootMqApplicationTests.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="16" column="48" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="48" />
+            <state relative-caret-position="304">
+              <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
               <folding>
                 <element signature="e#1300#1301#0" expanded="true" />
                 <element signature="e#1340#1341#0" expanded="true" />
@@ -72,57 +43,31 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/receiver/HelloReceiver2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/receiver/TopicReceiver1.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/receiver/TopicReceiver2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/config/FanoutRabbitConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
+            <state relative-caret-position="179">
               <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#232#233#0" expanded="true" />
-                <element signature="e#276#277#0" expanded="true" />
-                <element signature="e#317#318#0" expanded="true" />
-                <element signature="e#361#362#0" expanded="true" />
-                <element signature="e#402#403#0" expanded="true" />
-                <element signature="e#446#447#0" expanded="true" />
-                <element signature="e#495#496#0" expanded="true" />
-                <element signature="e#554#555#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="30" selection-start-column="30" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/SpringbootMqApplication.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -130,7 +75,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/config/TopicRabbitConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
+            <state relative-caret-position="209">
               <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -142,8 +87,32 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/sender/HelloSender.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="48" column="58" selection-start-line="48" selection-start-column="44" selection-end-line="48" selection-end-column="58" />
+            <state relative-caret-position="332">
+              <caret line="26" column="50" lean-forward="true" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/original/hellow/Sender.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="23" column="61" lean-forward="true" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/original/hellow/Recv.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="27" column="56" lean-forward="true" selection-start-line="27" selection-start-column="56" selection-end-line="27" selection-end-column="56" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -202,6 +171,8 @@
         <option value="$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/config/FanoutRabbitConfig.java" />
         <option value="$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/config/TopicRabbitConfig.java" />
         <option value="$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/config/RabbitConfig.java" />
+        <option value="$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/original/hellow/Sender.java" />
+        <option value="$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/original/hellow/Recv.java" />
       </list>
     </option>
   </component>
@@ -224,7 +195,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1936" />
@@ -238,8 +209,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -290,7 +259,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="springbootmq" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="hellow" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="springboot-demo" type="b2602c69:ProjectViewProjectNode" />
@@ -298,29 +267,7 @@
               <item name="springboot-mq" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="springbootmq" type="462c0819:PsiDirectoryNode" />
-              <item name="hello" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="springboot-demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="springboot-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="springboot-mq" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="springbootmq" type="462c0819:PsiDirectoryNode" />
-              <item name="receiver" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="springboot-demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="springboot-demo" type="462c0819:PsiDirectoryNode" />
-              <item name="springboot-mq" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="springbootmq" type="462c0819:PsiDirectoryNode" />
-              <item name="sender" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="springboot-demo" type="b2602c69:ProjectViewProjectNode" />
@@ -350,6 +297,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -361,7 +310,7 @@
     <property name="RequestMappingsPanelWidth2" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1568818193201" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1570454623185" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/springboot-web/src/main/java/com/viking" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -388,7 +337,33 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.SpringbootMqApplicationTests.fanoutExchange">
+  <component name="RunManager" selected="Application.Recv">
+    <configuration name="Recv" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.viking.springbootmq.original.hellow.Recv" />
+      <module name="springboot-mq" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.viking.springbootmq.original.hellow.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Sender" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.viking.springbootmq.original.hellow.Sender" />
+      <module name="springboot-mq" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.viking.springbootmq.original.hellow.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SpringbootMqApplicationTests.fanoutExchange" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-mq" />
       <extension name="coverage">
@@ -400,38 +375,6 @@
       <option name="PACKAGE_NAME" value="com.viking.springbootmq" />
       <option name="MAIN_CLASS_NAME" value="com.viking.springbootmq.SpringbootMqApplicationTests" />
       <option name="METHOD_NAME" value="fanoutExchange" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SpringbootMqApplicationTests.hello" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springboot-mq" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.viking.springbootmq.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.viking.springbootmq" />
-      <option name="MAIN_CLASS_NAME" value="com.viking.springbootmq.SpringbootMqApplicationTests" />
-      <option name="METHOD_NAME" value="hello" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SpringbootMqApplicationTests.oneToMany" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springboot-mq" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.viking.springbootmq.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.viking.springbootmq" />
-      <option name="MAIN_CLASS_NAME" value="com.viking.springbootmq.SpringbootMqApplicationTests" />
-      <option name="METHOD_NAME" value="oneToMany" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -491,22 +434,22 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.SpringbootMqApplicationTests.hello" />
-      <item itemvalue="JUnit.SpringbootMqApplicationTests.oneToMany" />
-      <item itemvalue="Spring Boot.SpringbootMqApplication" />
-      <item itemvalue="Spring Boot.SpringbootWebApplication" />
-      <item itemvalue="Spring Boot.SpringbootMybatisPlusApplication" />
       <item itemvalue="JUnit.SpringbootMqApplicationTests.sendObject" />
       <item itemvalue="JUnit.SpringbootMqApplicationTests.topicExchange" />
       <item itemvalue="JUnit.SpringbootMqApplicationTests.fanoutExchange" />
+      <item itemvalue="Spring Boot.SpringbootMqApplication" />
+      <item itemvalue="Spring Boot.SpringbootWebApplication" />
+      <item itemvalue="Spring Boot.SpringbootMybatisPlusApplication" />
+      <item itemvalue="Application.Sender" />
+      <item itemvalue="Application.Recv" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Recv" />
+        <item itemvalue="Application.Sender" />
         <item itemvalue="JUnit.SpringbootMqApplicationTests.fanoutExchange" />
         <item itemvalue="JUnit.SpringbootMqApplicationTests.topicExchange" />
         <item itemvalue="JUnit.SpringbootMqApplicationTests.sendObject" />
-        <item itemvalue="JUnit.SpringbootMqApplicationTests.oneToMany" />
-        <item itemvalue="JUnit.SpringbootMqApplicationTests.hello" />
       </list>
     </recent_temporary>
   </component>
@@ -526,6 +469,10 @@
       <workItem from="1568701537909" duration="10891000" />
       <workItem from="1568718903683" duration="3787000" />
       <workItem from="1568811821730" duration="3520000" />
+      <workItem from="1568902660413" duration="710000" />
+      <workItem from="1569043557837" duration="659000" />
+      <workItem from="1569133353919" duration="1220000" />
+      <workItem from="1570441782592" duration="6367000" />
     </task>
     <servers />
   </component>
@@ -562,12 +509,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24145000" />
+    <option name="totallyTimeSpent" value="33101000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25799572" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26865673" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -578,7 +526,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32938644" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.17596567" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.43776825" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -607,13 +555,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/SpringbootMqApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.2.0/mybatis-plus-core-3.2.0.jar!/com/baomidou/mybatisplus/core/config/GlobalConfig.class" />
     <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-core/3.2.0/mybatis-plus-core-3.2.0.jar!/com/baomidou/mybatisplus/core/mapper/BaseMapper.class" />
     <entry file="file://$PROJECT_DIR$/springboot-mybatis-plus/src/main/java/com/viking/springbootmybatisplus/dao/StudentMapper.java">
@@ -757,13 +698,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="30" selection-start-column="30" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/springboot-mq/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="513">
@@ -815,20 +749,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/receiver/FanoutReceiverC.java">
+    <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/receiver/HelloReceiver1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+        <state relative-caret-position="114">
+          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/receiver/HelloReceiver1.java">
+    <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/receiver/FanoutReceiverC.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+        <state relative-caret-position="114">
+          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -837,7 +771,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/receiver/HelloReceiver2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
+        <state relative-caret-position="114">
           <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -847,7 +781,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/receiver/TopicReceiver1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
+        <state relative-caret-position="114">
           <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -857,7 +791,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/receiver/TopicReceiver2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
+        <state relative-caret-position="114">
           <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -865,10 +799,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/sender/HelloSender.java">
+    <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/config/TopicRabbitConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="48" column="58" selection-start-line="48" selection-start-column="44" selection-end-line="48" selection-end-column="58" />
+        <state relative-caret-position="209">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -877,36 +811,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/config/FanoutRabbitConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
+        <state relative-caret-position="179">
           <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#232#233#0" expanded="true" />
-            <element signature="e#276#277#0" expanded="true" />
-            <element signature="e#317#318#0" expanded="true" />
-            <element signature="e#361#362#0" expanded="true" />
-            <element signature="e#402#403#0" expanded="true" />
-            <element signature="e#446#447#0" expanded="true" />
-            <element signature="e#495#496#0" expanded="true" />
-            <element signature="e#554#555#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/config/TopicRabbitConfig.java">
+    <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/config/RabbitConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+        <state relative-caret-position="285">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/SpringbootMqApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/springboot-mq/src/test/java/com/viking/springbootmq/SpringbootMqApplicationTests.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="16" column="48" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="48" />
+        <state relative-caret-position="304">
+          <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
           <folding>
             <element signature="e#1300#1301#0" expanded="true" />
             <element signature="e#1340#1341#0" expanded="true" />
@@ -914,10 +847,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/config/RabbitConfig.java">
+    <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        <state>
+          <caret column="30" selection-start-column="30" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/sender/HelloSender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="26" column="50" lean-forward="true" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/rabbitmq/amqp-client/5.4.3/amqp-client-5.4.3.jar!/com/rabbitmq/client/impl/ChannelN.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="115">
+          <caret line="233" selection-start-line="233" selection-end-line="233" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/original/hellow/Sender.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="23" column="61" lean-forward="true" selection-start-line="23" selection-start-column="61" selection-end-line="23" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/original/hellow/Recv.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="27" column="56" lean-forward="true" selection-start-line="27" selection-start-column="56" selection-end-line="27" selection-end-column="56" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
