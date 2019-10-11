@@ -1,9 +1,17 @@
 package com.viking.springbootweb.mytest;
 
+import org.junit.Test;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by yanshuai on 2019/10/8
@@ -38,6 +46,13 @@ public class MyTest {
     public static void main(String[] args) {
         overlapImage();
         System.out.println("done");
+    }
+    @Test
+    public void localDateTest(){
+        ZonedDateTime zonedDateTime = LocalDate.now().atStartOfDay(ZoneId.systemDefault());
+        Instant instant1 = zonedDateTime.toInstant();
+        Date now = Date.from(instant1);
+        System.out.println(now);
     }
 
 }
