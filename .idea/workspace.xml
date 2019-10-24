@@ -29,8 +29,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/springboot-web/src/test/java/com/viking/springbootweb/mytest/MyTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="665">
-              <caret line="38" column="23" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+            <state relative-caret-position="874">
+              <caret line="46" column="23" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -87,22 +87,31 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/springboot-web/src/main/java/com/viking/springbootweb/util/IpConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+            <state relative-caret-position="152">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/springboot-web/src/main/java/com/viking/springbootweb/util/StrategyDemo.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="456">
-              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+              <caret line="24" selection-start-line="24" selection-end-line="24" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#216#217#0" expanded="true" />
                 <element signature="e#284#285#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="203">
+              <caret line="747" column="17" lean-forward="true" selection-start-line="747" selection-start-column="17" selection-end-line="747" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -158,8 +167,12 @@
         <option value="$PROJECT_DIR$/springboot-mq/src/main/java/com/viking/springbootmq/sender/HelloSender.java" />
         <option value="$PROJECT_DIR$/springboot-web/src/main/java/com/viking/springbootweb/util/JwtUtil.java" />
         <option value="$PROJECT_DIR$/springboot-web/pom.xml" />
-        <option value="$PROJECT_DIR$/springboot-web/src/main/java/com/viking/springbootweb/util/IpConfig.java" />
         <option value="$PROJECT_DIR$/springboot-web/src/main/java/com/viking/springbootweb/controller/mybatisplus/StudentController.java" />
+        <option value="$PROJECT_DIR$/springboot-web/src/main/java/com/viking/springbootweb/util/IpConfig.java" />
+        <option value="$PROJECT_DIR$/springboot-web/src/test/java/com/viking/springbootweb/lambda/RosterTest.java" />
+        <option value="$PROJECT_DIR$/springboot-web/src/test/java/com/viking/springbootweb/lambda/Person.java" />
+        <option value="$PROJECT_DIR$/springboot-web/src/test/java/com/viking/springbootweb/lambda/LambdaScopeTest.java" />
+        <option value="$PROJECT_DIR$/springboot-web/src/test/java/com/viking/springbootweb/mytest/LocalDateTest.java" />
         <option value="$PROJECT_DIR$/springboot-web/src/test/java/com/viking/springbootweb/mytest/MyTest.java" />
         <option value="$PROJECT_DIR$/springboot-web/src/main/java/com/viking/springbootweb/util/StrategyDemo.java" />
       </list>
@@ -206,6 +219,11 @@
             <path>
               <item name="springboot-demo" type="b2602c69:ProjectViewProjectNode" />
               <item name="springboot-demo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="springboot-demo" type="b2602c69:ProjectViewProjectNode" />
+              <item name="springboot-demo" type="462c0819:PsiDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="springboot-demo" type="b2602c69:ProjectViewProjectNode" />
@@ -311,7 +329,7 @@
       <module name="springboot-web" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.viking.springbootweb.mytest.*" />
+          <option name="PATTERN" value="com.viking.springbootweb.util.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -354,7 +372,7 @@
       <module name="springboot-mq" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.viking.springbootmq.*" />
+          <option name="PATTERN" value="com.viking.springbootweb.lambda.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -455,8 +473,8 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="SpringbootMqApplicationTests_fanoutExchange - 2019.09.18 at 22h 44m 39s.xml">
-      <configuration name="SpringbootMqApplicationTests.fanoutExchange" configurationId="JUnit" />
+    <history-entry file="MyTest_localDateTest - 2019.10.10 at 14h 05m 42s.xml">
+      <configuration name="MyTest.localDateTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="SpringbootMqApplicationTests_fanoutExchange - 2019.09.18 at 22h 45m 01s.xml">
       <configuration name="SpringbootMqApplicationTests.fanoutExchange" configurationId="JUnit" />
@@ -553,13 +571,6 @@
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-extension/3.2.0/mybatis-plus-extension-3.2.0.jar!/com/baomidou/mybatisplus/extension/service/IService.class" />
     <entry file="jar://$MAVEN_REPOSITORY$/com/baomidou/mybatis-plus-extension/3.2.0/mybatis-plus-extension-3.2.0.jar!/com/baomidou/mybatisplus/extension/service/impl/ServiceImpl.class" />
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/springboot-mybatis-plus/src/main/java/com/viking/springbootmybatisplus/service/StudentService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -688,12 +699,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/springboot-web/src/test/java/com/viking/springbootweb/mytest/MyTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="665">
-          <caret line="38" column="23" selection-start-line="38" selection-start-column="23" selection-end-line="38" selection-end-column="23" />
+        <state relative-caret-position="874">
+          <caret line="46" column="23" selection-start-line="46" selection-start-column="23" selection-end-line="46" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/springboot-web/src/main/java/com/viking/springbootweb/controller/mq/HelloController.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="16" column="43" selection-start-line="16" selection-start-column="43" selection-end-line="16" selection-end-column="43" />
@@ -714,13 +725,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/springboot-mybatis-plus/src/main/java/com/viking/springbootmybatisplus/SpringbootMybatisPlusApplication.java">
+    <entry file="file://$PROJECT_DIR$/springboot-web/src/test/java/com/viking/springbootweb/lambda/LambdaScopeTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
           <folding>
-            <element signature="e#715#716#0" expanded="true" />
-            <element signature="e#756#757#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -734,15 +744,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/springboot-web/src/main/java/com/viking/springbootweb/util/IpConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        <state relative-caret-position="152">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/springboot-web/src/main/java/com/viking/springbootweb/util/StrategyDemo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#216#217#0" expanded="true" />
