@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ada0bea3-f99c-4350-afeb-177a48246757" name="Default Changelist" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/springboot-web/src/main/java/com/viking/springbootweb/util/IpConfig.java" afterPath="$PROJECT_DIR$/springboot-web/src/main/java/com/viking/springbootweb/util/IpConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/springboot-web/src/test/java/com/viking/springbootweb/mytest/MyTest.java" afterPath="$PROJECT_DIR$/springboot-web/src/test/java/com/viking/springbootweb/mytest/MyTest.java" />
-    </list>
+    <list default="true" id="ada0bea3-f99c-4350-afeb-177a48246757" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/springboot-web/target/" />
@@ -101,8 +97,8 @@
       <file leaf-file-name="LambdaScopeTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/springboot-web/src/test/java/com/viking/springbootweb/lambda/LambdaScopeTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
-              <caret line="25" column="57" lean-forward="false" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
+            <state relative-caret-position="779">
+              <caret line="41" column="62" lean-forward="true" selection-start-line="41" selection-start-column="62" selection-end-line="41" selection-end-column="62" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -560,7 +556,7 @@
       <workItem from="1569723133282" duration="2036000" />
       <workItem from="1570526483384" duration="9136000" />
       <workItem from="1570669178304" duration="2921000" />
-      <workItem from="1570779803011" duration="1516000" />
+      <workItem from="1570779803011" duration="2193000" />
     </task>
     <servers />
   </component>
@@ -597,7 +593,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43877000" />
+    <option name="totallyTimeSpent" value="44554000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -948,8 +944,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/springboot-web/src/test/java/com/viking/springbootweb/lambda/LambdaScopeTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="25" column="57" lean-forward="false" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
+        <state relative-caret-position="779">
+          <caret line="41" column="62" lean-forward="true" selection-start-line="41" selection-start-column="62" selection-end-line="41" selection-end-column="62" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
