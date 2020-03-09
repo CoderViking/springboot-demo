@@ -3,7 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>com.viking</groupId>
     <artifactId>springboot-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -11,7 +10,21 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <boot.version>2.1.4.RELEASE</boot.version>
     </properties>
+    <!--管理子类所有的jar包的版本，这样的目的：方便去统一升级和维护-->
+    <dependencyManagement>
+        <dependencies>
+            <!-- springboot 的依赖继承-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <modules>
         <module>springboot-mybatis-plus</module>
@@ -19,4 +32,12 @@
         <module>springboot-mq</module>
     </modules>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
