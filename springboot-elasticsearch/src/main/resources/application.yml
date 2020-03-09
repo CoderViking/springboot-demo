@@ -1,0 +1,8 @@
+server:
+  port: 9000
+# 使用SpringBoot的template连接es
+#spring.data.elasticsearch.cluster-nodes=localhost:9300
+#spring.data.elasticsearch.cluster-name=my-application
+# 使用RestHighLevelClient连接es
+elasticsearch:
+  host: 172.16.2.81:9200
