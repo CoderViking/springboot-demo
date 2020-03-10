@@ -1,7 +1,7 @@
-package com.viking.springbootsecurity.core.dao;
+package com.viking.elasticsearch.springbootsecurity.core.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.viking.springbootsecurity.core.entity.SysRoleEntity;
+import com.viking.elasticsearch.springbootsecurity.core.entity.SysRoleEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

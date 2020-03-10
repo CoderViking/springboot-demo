@@ -1,12 +1,12 @@
-package com.viking.springbootsecurity.core.service.impl;
+package com.viking.elasticsearch.springbootsecurity.core.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.viking.springbootsecurity.core.dao.SysUserDao;
-import com.viking.springbootsecurity.core.entity.SysPermissionsEntity;
-import com.viking.springbootsecurity.core.entity.SysRoleEntity;
-import com.viking.springbootsecurity.core.entity.SysUserEntity;
-import com.viking.springbootsecurity.core.service.SysUserService;
+import com.viking.elasticsearch.springbootsecurity.core.dao.SysUserDao;
+import com.viking.elasticsearch.springbootsecurity.core.entity.SysPermissionsEntity;
+import com.viking.elasticsearch.springbootsecurity.core.entity.SysRoleEntity;
+import com.viking.elasticsearch.springbootsecurity.core.entity.SysUserEntity;
+import com.viking.elasticsearch.springbootsecurity.core.service.SysUserService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

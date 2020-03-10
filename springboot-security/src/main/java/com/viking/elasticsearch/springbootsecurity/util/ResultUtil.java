@@ -1,4 +1,4 @@
-package com.viking.springbootsecurity.util;
+package com.viking.elasticsearch.springbootsecurity.util;
 
 
 import com.alibaba.fastjson.JSON;

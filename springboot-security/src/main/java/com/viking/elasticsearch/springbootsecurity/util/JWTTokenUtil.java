@@ -1,8 +1,8 @@
-package com.viking.springbootsecurity.util;
+package com.viking.elasticsearch.springbootsecurity.util;
 
 import com.alibaba.fastjson.JSON;
-import com.viking.springbootsecurity.config.JWTConfig;
-import com.viking.springbootsecurity.security.entity.SelfUserEntity;
+import com.viking.elasticsearch.springbootsecurity.config.JWTConfig;
+import com.viking.elasticsearch.springbootsecurity.security.entity.SelfUserEntity;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 

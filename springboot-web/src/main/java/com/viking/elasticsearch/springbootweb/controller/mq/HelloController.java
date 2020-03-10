@@ -1,6 +1,6 @@
-package com.viking.springbootweb.controller.mq;
+package com.viking.elasticsearch.springbootweb.controller.mq;
 
-import com.viking.springbootmq.hello.Hello;
+import com.viking.elasticsearch.springbootmq.hello.Hello;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

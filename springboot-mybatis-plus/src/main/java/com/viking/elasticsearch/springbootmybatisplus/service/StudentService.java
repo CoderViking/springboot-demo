@@ -1,7 +1,7 @@
-package com.viking.springbootmybatisplus.service;
+package com.viking.elasticsearch.springbootmybatisplus.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.viking.springbootmybatisplus.entity.Student;
+import com.viking.elasticsearch.springbootmybatisplus.entity.Student;
 
 /**
  * Created by Viking on 2019/9/17

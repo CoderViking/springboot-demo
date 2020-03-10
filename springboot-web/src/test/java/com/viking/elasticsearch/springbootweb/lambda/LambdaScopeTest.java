@@ -1,4 +1,4 @@
-package com.viking.springbootweb.lambda;
+package com.viking.elasticsearch.springbootweb.lambda;
 
 import java.util.Arrays;
 import java.util.function.Consumer;

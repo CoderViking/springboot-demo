@@ -1,9 +1,9 @@
-package com.viking.springbootsecurity;
+package com.viking.elasticsearch.springbootsecurity;
 
-import com.viking.springbootsecurity.core.entity.SysUserEntity;
-import com.viking.springbootsecurity.core.entity.SysUserRoleEntity;
-import com.viking.springbootsecurity.core.service.SysUserRoleService;
-import com.viking.springbootsecurity.core.service.SysUserService;
+import com.viking.elasticsearch.springbootsecurity.core.entity.SysUserEntity;
+import com.viking.elasticsearch.springbootsecurity.core.entity.SysUserRoleEntity;
+import com.viking.elasticsearch.springbootsecurity.core.service.SysUserRoleService;
+import com.viking.elasticsearch.springbootsecurity.core.service.SysUserService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

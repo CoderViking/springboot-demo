@@ -6,3 +6,4 @@ server:
 # 使用RestHighLevelClient连接es
 elasticsearch:
   host: 172.16.2.81:9200
+  hostMap: {172.16.2.81: 9300,172.16.2.82: 9300}

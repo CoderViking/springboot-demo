@@ -1,4 +1,4 @@
-package com.viking.springbootweb.mytest;
+package com.viking.elasticsearch.springbootweb.mytest;
 
 import org.junit.Test;
 

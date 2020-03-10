@@ -1,4 +1,4 @@
-package com.viking.springbootsecurity;
+package com.viking.elasticsearch.springbootsecurity;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,8 +1,8 @@
-package com.viking.springbootsecurity.security;
+package com.viking.elasticsearch.springbootsecurity.security;
 
-import com.viking.springbootsecurity.core.entity.SysPermissionsEntity;
-import com.viking.springbootsecurity.core.service.SysUserService;
-import com.viking.springbootsecurity.security.entity.SelfUserEntity;
+import com.viking.elasticsearch.springbootsecurity.security.entity.SelfUserEntity;
+import com.viking.elasticsearch.springbootsecurity.core.entity.SysPermissionsEntity;
+import com.viking.elasticsearch.springbootsecurity.core.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;

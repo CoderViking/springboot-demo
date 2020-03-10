@@ -1,4 +1,4 @@
-package com.viking.springbootmq;
+package com.viking.elasticsearch.springbootmq;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

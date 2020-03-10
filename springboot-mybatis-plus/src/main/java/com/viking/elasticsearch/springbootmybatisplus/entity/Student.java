@@ -1,4 +1,4 @@
-package com.viking.springbootmybatisplus.entity;
+package com.viking.elasticsearch.springbootmybatisplus.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

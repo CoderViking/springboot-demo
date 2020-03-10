@@ -1,4 +1,4 @@
-package com.viking.springbootsecurity.security.entity;
+package com.viking.elasticsearch.springbootsecurity.security.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

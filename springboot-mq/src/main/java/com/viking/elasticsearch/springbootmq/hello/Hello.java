@@ -1,4 +1,4 @@
-package com.viking.springbootmq.hello;
+package com.viking.elasticsearch.springbootmq.hello;
 
 import java.io.Serializable;
 

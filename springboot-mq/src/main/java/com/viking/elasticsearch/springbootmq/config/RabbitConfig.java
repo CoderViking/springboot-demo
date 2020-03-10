@@ -1,4 +1,4 @@
-package com.viking.springbootmq.config;
+package com.viking.elasticsearch.springbootmq.config;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;

@@ -1,11 +1,10 @@
-package com.viking.springbootsecurity.security.service;
+package com.viking.elasticsearch.springbootsecurity.security.service;
 
-import com.viking.springbootsecurity.core.entity.SysUserEntity;
-import com.viking.springbootsecurity.core.service.SysUserService;
-import com.viking.springbootsecurity.security.entity.SelfUserEntity;
+import com.viking.elasticsearch.springbootsecurity.security.entity.SelfUserEntity;
+import com.viking.elasticsearch.springbootsecurity.core.entity.SysUserEntity;
+import com.viking.elasticsearch.springbootsecurity.core.service.SysUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;

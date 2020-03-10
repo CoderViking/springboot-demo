@@ -1,4 +1,4 @@
-package com.viking.springbootsecurity.security.handler;
+package com.viking.elasticsearch.springbootsecurity.security.handler;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;

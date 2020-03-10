@@ -1,4 +1,4 @@
-package com.viking.springbootweb.util;
+package com.viking.elasticsearch.springbootweb.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

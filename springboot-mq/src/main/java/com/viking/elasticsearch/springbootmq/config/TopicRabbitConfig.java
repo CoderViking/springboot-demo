@@ -1,4 +1,4 @@
-package com.viking.springbootmq.config;
+package com.viking.elasticsearch.springbootmq.config;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;

@@ -1,9 +1,8 @@
-package com.viking.springbootsecurity.security.jwt;
+package com.viking.elasticsearch.springbootsecurity.security.jwt;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.viking.springbootsecurity.config.JWTConfig;
-import com.viking.springbootsecurity.security.entity.SelfUserEntity;
+import com.viking.elasticsearch.springbootsecurity.config.JWTConfig;
+import com.viking.elasticsearch.springbootsecurity.security.entity.SelfUserEntity;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;

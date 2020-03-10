@@ -1,6 +1,6 @@
-package com.viking.springbootmq.receiver;
+package com.viking.elasticsearch.springbootmq.receiver;
 
-import com.viking.springbootmq.hello.Hello;
+import com.viking.elasticsearch.springbootmq.hello.Hello;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;

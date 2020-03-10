@@ -1,12 +1,10 @@
-package com.viking.springbootweb.lambda;
+package com.viking.elasticsearch.springbootweb.lambda;
 
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.Comparator;
 import java.util.function.Predicate;
 import java.lang.Iterable;
-import java.time.chrono.IsoChronology;
 
 /**
  * Created by Viking on 2019/10/9

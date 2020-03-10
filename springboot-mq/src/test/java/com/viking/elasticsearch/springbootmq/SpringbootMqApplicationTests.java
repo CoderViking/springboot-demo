@@ -1,7 +1,7 @@
-package com.viking.springbootmq;
+package com.viking.elasticsearch.springbootmq;
 
-import com.viking.springbootmq.hello.Hello;
-import com.viking.springbootmq.sender.HelloSender;
+import com.viking.elasticsearch.springbootmq.hello.Hello;
+import com.viking.elasticsearch.springbootmq.sender.HelloSender;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.viking.springbootweb.mytest;
+package com.viking.elasticsearch.springbootweb.mytest;
 
 /**
  * Created by yanshuai on 2019/10/10

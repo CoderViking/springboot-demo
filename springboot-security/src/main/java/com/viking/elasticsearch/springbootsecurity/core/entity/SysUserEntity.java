@@ -1,4 +1,4 @@
-package com.viking.springbootsecurity.core.entity;
+package com.viking.elasticsearch.springbootsecurity.core.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;

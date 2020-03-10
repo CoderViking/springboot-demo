@@ -1,6 +1,6 @@
-package com.viking.springbootmq.sender;
+package com.viking.elasticsearch.springbootmq.sender;
 
-import com.viking.springbootmq.hello.Hello;
+import com.viking.elasticsearch.springbootmq.hello.Hello;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

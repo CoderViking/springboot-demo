@@ -1,4 +1,4 @@
-package com.viking.springbootmq.original.hellow;
+package com.viking.elasticsearch.springbootmq.original.hellow;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;

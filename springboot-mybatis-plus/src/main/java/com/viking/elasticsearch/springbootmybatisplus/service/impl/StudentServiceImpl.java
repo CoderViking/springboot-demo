@@ -1,9 +1,9 @@
-package com.viking.springbootmybatisplus.service.impl;
+package com.viking.elasticsearch.springbootmybatisplus.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.viking.springbootmybatisplus.dao.StudentMapper;
-import com.viking.springbootmybatisplus.entity.Student;
-import com.viking.springbootmybatisplus.service.StudentService;
+import com.viking.elasticsearch.springbootmybatisplus.entity.Student;
+import com.viking.elasticsearch.springbootmybatisplus.dao.StudentMapper;
+import com.viking.elasticsearch.springbootmybatisplus.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  * 这里我们举一些常用的方法演示.
  */
 @Service
-public class StudentServiceImpl extends ServiceImpl<StudentMapper,Student> implements StudentService {
+public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> implements StudentService {
     @Autowired
     private StudentMapper mapper;
 

@@ -1,6 +1,6 @@
-package com.viking.springbootsecurity.util;
+package com.viking.elasticsearch.springbootsecurity.util;
 
-import com.viking.springbootsecurity.security.entity.SelfUserEntity;
+import com.viking.elasticsearch.springbootsecurity.security.entity.SelfUserEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class SecurityUtil {

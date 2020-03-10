@@ -1,6 +1,7 @@
 package com.viking.elasticsearch;
 
 import com.viking.elasticsearch.config.ClientHelper;
+import com.viking.elasticsearch.elasticsearch.EsIndexManageUtil;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.DocWriteRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
@@ -41,6 +42,32 @@ import java.util.*;
 @SpringBootTest
 public class ElasticSearchTest  {
     private static List<String> fieldTypes = Arrays.asList("boolean","byte","short","int","integer","float","double","long","string","date");
+
+    /*
+    String类型，又分两种：
+        text：可分词，不可参与聚合
+        keyword：不可分词，数据会作为完整字段进行匹配，可以参与聚合
+    Numerical：数值类型，分两类
+        基本数据类型：long、interger、short、byte、double、float、half_float
+        浮点数的高精度类型：scaled_float
+        需要指定一个精度因子，比如10或100。elasticsearch会把真实值乘以这个因子后存储，取出时再还原。
+    Date：日期类型
+        elasticsearch可以对日期格式化为字符串存储，但是建议我们存储为毫秒值，存储为long，节省空间。
+    * */
+
+    @Test
+    public void createIndexTest(){
+        Map<String,String> field1 = new HashMap<>();field1.put("name","ap");field1.put("type","string");
+        Map<String,String> field2 = new HashMap<>();field2.put("name","apad");field2.put("type","string");
+        Map<String,String> field3 = new HashMap<>();field3.put("name","apvu");field3.put("type","float");
+        Map<String,String> field4 = new HashMap<>();field4.put("name","apid");field4.put("type","long");
+        Map<String,String> field5 = new HashMap<>();field5.put("name","isPerson");field5.put("type","boolean");
+        Map<String,String> field6 = new HashMap<>();field6.put("name","date");field6.put("type","date");
+        List<Map<String,String>> columnList = Arrays.asList(field1,field2,field3,field4,field5,field6);
+        boolean success = EsIndexManageUtil.createNewIndex(null, "transportclient", "type", columnList);
+        System.out.println(success);
+    }
+
     @Test
     public void voidTest() throws IOException {
         Map<String,String> field1 = new HashMap<>();field1.put("name","ap");field1.put("type","string");
@@ -65,7 +92,7 @@ public class ElasticSearchTest  {
             }else if ("boolean".equals(fieldType)){
                 contentBuilder.field("type", "boolean").endObject();
             }else {
-                contentBuilder.field("type", "text").endObject();
+                contentBuilder.field("type", "keyword").endObject();
 //                contentBuilder.field("index", "not_analyzed").endObject();
             }
         }

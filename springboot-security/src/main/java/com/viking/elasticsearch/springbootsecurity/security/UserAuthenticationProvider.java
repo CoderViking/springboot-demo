@@ -1,9 +1,9 @@
-package com.viking.springbootsecurity.security;
+package com.viking.elasticsearch.springbootsecurity.security;
 
-import com.viking.springbootsecurity.core.entity.SysRoleEntity;
-import com.viking.springbootsecurity.core.service.SysUserService;
-import com.viking.springbootsecurity.security.entity.SelfUserEntity;
-import com.viking.springbootsecurity.security.service.SelfUserDetailsService;
+import com.viking.elasticsearch.springbootsecurity.core.service.SysUserService;
+import com.viking.elasticsearch.springbootsecurity.security.entity.SelfUserEntity;
+import com.viking.elasticsearch.springbootsecurity.security.service.SelfUserDetailsService;
+import com.viking.elasticsearch.springbootsecurity.core.entity.SysRoleEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

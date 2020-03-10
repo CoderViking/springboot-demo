@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.viking.springbootsecurity.core.dao.SysUserDao">
+<mapper namespace="com.viking.elasticsearch.springbootsecurity.core.dao.SysUserDao">
 
     <!-- 查询用户所有角色 -->
-    <select id="selectSysRoleByUserId" resultType="com.viking.springbootsecurity.core.entity.SysRoleEntity" parameterType="long">
+    <select id="selectSysRoleByUserId" resultType="com.viking.elasticsearch.springbootsecurity.core.entity.SysRoleEntity" parameterType="long">
 		SELECT sr.* FROM sys_role sr
 		LEFT JOIN sys_user_role se ON se.role_id = sr.role_id
 		WHERE se.user_id = #{userId}
 	</select>
 	<select id="selectSysPermissionsByUserId" parameterType="java.lang.Long"
-			resultType="com.viking.springbootsecurity.core.entity.SysUserEntity">
+			resultType="com.viking.elasticsearch.springbootsecurity.core.entity.SysUserEntity">
         SELECT DISTINCT p.* FROM sys_user_role ur
 			LEFT JOIN sys_role_permissions rp ON ur.role_id = rm.role_id
 			LEFT JOIN sys_permissions p ON rp.rid = p.permissions_id

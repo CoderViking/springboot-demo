@@ -1,11 +1,9 @@
-package com.viking.springbootweb.lambda;
+package com.viking.elasticsearch.springbootweb.lambda;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.time.chrono.IsoChronology;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.time.Period;
 
 /**
  * Created by Viking on 2019/10/9
