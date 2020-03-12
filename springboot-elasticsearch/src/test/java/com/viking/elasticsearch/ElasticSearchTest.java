@@ -1,13 +1,9 @@
 package com.viking.elasticsearch;
 
-import com.viking.elasticsearch.config.ClientHelper;
-import com.viking.elasticsearch.elasticsearch.EsIndexManageUtil;
+import com.viking.elasticsearch.config.RestClientHelper;
+import com.viking.elasticsearch.elasticsearch.restclient.ESRestClientIndexUtil;
+import com.viking.elasticsearch.elasticsearch.transportclient.ESTransportClientIndexUtil;
 import org.elasticsearch.action.ActionListener;
-import org.elasticsearch.action.DocWriteRequest;
-import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
-import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
-import org.elasticsearch.action.admin.indices.mapping.put.PutMappingRequest;
-import org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetRequest;
@@ -18,15 +14,20 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
-import org.elasticsearch.client.Client;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.common.settings.Settings;
+import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.common.unit.TimeValue;
-import org.elasticsearch.common.xcontent.XContentBuilder;
-import org.elasticsearch.common.xcontent.XContentFactory;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.aggregations.Aggregation;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.Aggregations;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms;
+import org.elasticsearch.search.aggregations.bucket.terms.TermsAggregationBuilder;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,6 +35,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created By Viking on 2020/3/9
@@ -56,6 +58,82 @@ public class ElasticSearchTest  {
     * */
 
     @Test
+    public void deleteIndex(){
+        ESRestClientIndexUtil.deleteIndex("rest_02");
+//        ESTransportClientIndexUtil.deleteIndex("transportclient_20031017");
+    }
+    @Test
+    public void createIndex(){
+        Map<String,String> field1 = new HashMap<>();field1.put("name","ap");field1.put("type","string");
+        Map<String,String> field2 = new HashMap<>();field2.put("name","apad");field2.put("type","string");
+        Map<String,String> field3 = new HashMap<>();field3.put("name","apvu");field3.put("type","float");
+        Map<String,String> field4 = new HashMap<>();field4.put("name","apid");field4.put("type","long");
+        Map<String,String> field5 = new HashMap<>();field5.put("name","isPerson");field5.put("type","boolean");
+        Map<String,String> field6 = new HashMap<>();field6.put("name","date");field6.put("type","date");
+        Map<String,String> field7 = new HashMap<>();field7.put("name","descript");field7.put("type","text");
+        List<Map<String,String>> columnList = Arrays.asList(field1,field2,field3,field4,field5,field6,field7);
+        ESRestClientIndexUtil.createIndex("rest_03","type",columnList);
+    }
+    @Test
+    public void insertDoc(){
+        String indexName = "rest_02";
+        String type = "type";
+        String esId = UUID.randomUUID().toString();
+        Map<String,Object> bean = new HashMap<>();
+        bean.put("ap","芒砀山号");
+        bean.put("apad","太阳系");
+        bean.put("apvu",90.0F);
+        bean.put("apid",999999689L);
+        bean.put("isPerson",false);
+        bean.put("date",new Date().getTime());//不能直接使用Date类型
+        bean.put("descript","地球防卫长城");
+        ESRestClientIndexUtil.insertDoc(indexName,type,esId,bean);
+
+    }
+    @Test
+    public void getTest(){
+        String indexName = "rest_01";
+        String type = "type";
+        String esId = "522f2bd9-81b7-4e69-aa1b-d3921e6b4298";
+        GetResponse response = ESRestClientIndexUtil.get(indexName, type, esId);
+        Map<String, Object> map = response.getSourceAsMap();
+        System.out.println(map);
+    }
+    @Test
+    public void searchTest(){
+        String indexName = "rest_01";
+        String type = "type";
+        SearchRequest searchRequest = new SearchRequest(indexName);
+        searchRequest.types(type);
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+//        boolQueryBuilder.must(QueryBuilders.termQuery("ap","申请人的主要名称"));
+//        boolQueryBuilder.must(QueryBuilders.matchQuery("descript","地球"));//match暂时无法查询，原因时es的服务器版本和客户端版本不一致，6.0.0的服务器缺少对auto_generate_synonyms_phrase_query的支持
+        boolQueryBuilder.must(QueryBuilders.boolQuery().should(QueryBuilders.wildcardQuery("apad","*黄土高坡*").boost(10)));
+        SearchResponse response = ESRestClientIndexUtil.search(indexName, type, 0, 100, null, null, "apvu", SortOrder.DESC, boolQueryBuilder);
+        if (response!=null) {
+            for (SearchHit hit : response.getHits().getHits()) {
+                System.out.println(hit.getSourceAsString());
+//                System.out.println(hit.getSourceAsMap());
+            }
+        }
+    }
+    @Test
+    public void aggregationsTest(){
+        String indexName = "rest_02";
+        String type = "type";
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+//        boolQueryBuilder.must(QueryBuilders.boolQuery().should(QueryBuilders.wildcardQuery("descript.keyword","*地球*")));
+//        Map<Object, Long> count = ESRestClientIndexUtil.count(indexName, type, null, false, "apvu", boolQueryBuilder);
+//        Map<String, LinkedHashMap<Object, Long>> count1 = ESRestClientIndexUtil.count(indexName, type, null,  new String[]{"apvu","apad"}, boolQueryBuilder);
+//        System.out.println("count:"+count);
+//        System.out.println(count1);
+        ESRestClientIndexUtil.max(indexName, type, "apvu", boolQueryBuilder);
+        ESRestClientIndexUtil.min(indexName, type, "apvu", boolQueryBuilder);
+        ESRestClientIndexUtil.avg(indexName, type, "apvu", boolQueryBuilder);
+        ESRestClientIndexUtil.sum(indexName, type, "apvu", boolQueryBuilder);
+    }
+
+    @Test
     public void createIndexTest(){
         Map<String,String> field1 = new HashMap<>();field1.put("name","ap");field1.put("type","string");
         Map<String,String> field2 = new HashMap<>();field2.put("name","apad");field2.put("type","string");
@@ -64,7 +142,7 @@ public class ElasticSearchTest  {
         Map<String,String> field5 = new HashMap<>();field5.put("name","isPerson");field5.put("type","boolean");
         Map<String,String> field6 = new HashMap<>();field6.put("name","date");field6.put("type","date");
         List<Map<String,String>> columnList = Arrays.asList(field1,field2,field3,field4,field5,field6);
-        boolean success = EsIndexManageUtil.createNewIndex(null, "transportclient", "type", columnList);
+        boolean success = ESTransportClientIndexUtil.createNewIndex(null, "transportclient", "type", columnList);
         System.out.println(success);
     }
 
@@ -77,41 +155,12 @@ public class ElasticSearchTest  {
         Map<String,String> field5 = new HashMap<>();field5.put("name","isPerson");field5.put("type","boolean");
         Map<String,String> field6 = new HashMap<>();field6.put("name","date");field6.put("type","date");
         List<Map<String,String>> columnList = Arrays.asList(field1,field2,field3,field4,field5,field6);
-        System.out.println(ClientHelper.getClient());
-        XContentBuilder contentBuilder = XContentFactory.jsonBuilder().startObject().startObject("type").startObject("properties");
 
-        for (Map<String,String> column : columnList) {
-            if (!fieldTypes.contains(column.get("type").toLowerCase())) continue;
-            contentBuilder.startObject(column.get("name"));
-            String fieldType = column.get("type").toLowerCase();
-
-            if (Arrays.asList("byte","short","int","integer","long","date").contains(fieldType)){
-                contentBuilder.field("type", "long").endObject();
-            }else if (Arrays.asList("float","double").contains(fieldType)){
-                contentBuilder.field("type", "double").endObject();
-            }else if ("boolean".equals(fieldType)){
-                contentBuilder.field("type", "boolean").endObject();
-            }else {
-                contentBuilder.field("type", "keyword").endObject();
-//                contentBuilder.field("index", "not_analyzed").endObject();
-            }
-        }
-        contentBuilder.endObject().endObject().endObject();
-
-        CreateIndexRequest request = new CreateIndexRequest("myindex_02");
-        request.settings(Settings.builder()
-                .put("index.number_of_shards", 3)
-                .put("index.number_of_replicas", 0)
-        );
-        request.mapping("type",contentBuilder);
-        CreateIndexResponse response = ClientHelper.getClient().indices().create(request);
-        boolean success = response.isAcknowledged();
-        System.out.println("是否创建成功?"+success);
 
     }
     @Test// 测试es的使用，插入数据为例
     public void testClient(){
-        RestHighLevelClient client = ClientHelper.getClient();
+        RestHighLevelClient client = RestClientHelper.getInstance().getClient();
         IndexRequest indexRequest = new IndexRequest("blog", "java","index_08");
 
         Map<String, Object> blogMap = new HashMap<>();
@@ -132,7 +181,7 @@ public class ElasticSearchTest  {
 
     @Test// 测试es的同步方法增删改查
     public void crudTestInEs() throws IOException {
-        RestHighLevelClient client = ClientHelper.getClient();
+        RestHighLevelClient client = RestClientHelper.getInstance().getClient();
         Map<String, Object> blogMap = new HashMap<>();
         blogMap.put("id", "index_08");
         blogMap.put("title", "测试SpringBoot中使用RestHighLevelClient连接es");
@@ -179,7 +228,7 @@ public class ElasticSearchTest  {
     }
     @Test
     public void crudAsync(){
-        RestHighLevelClient client = ClientHelper.getClient();
+        RestHighLevelClient client = RestClientHelper.getInstance().getClient();
         // 增
         IndexRequest indexRequest = new IndexRequest("指定Index","指定type","指定id");
         indexRequest.source();

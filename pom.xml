@@ -10,9 +10,12 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <!-- 防止引入的springboot的父工程修改jdk的编译版本 -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <boot.version>2.1.4.RELEASE</boot.version>
     </properties>
-    <!--管理子类所有的jar包的版本，这样的目的：方便去统一升级和维护-->
+    <!--管理子工程所有的jar包的版本 方便统一升级和维护-->
     <dependencyManagement>
         <dependencies>
             <!-- springboot 的依赖继承-->
@@ -31,6 +34,7 @@
         <module>springboot-web</module>
         <module>springboot-mq</module>
         <module>springboot-elasticsearch</module>
+        <module>springboot-security</module>
     </modules>
 
     <build>

@@ -1,36 +1,29 @@
-package com.viking.elasticsearch.elasticsearch;
+package com.viking.elasticsearch.elasticsearch.transportclient;
 
-import com.viking.elasticsearch.config.ClientHelper;
+import com.viking.elasticsearch.config.TransportClientHelper;
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
 import org.elasticsearch.action.admin.indices.mapping.put.PutMappingRequest;
 import org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse;
-import org.elasticsearch.client.Client;
 import org.elasticsearch.client.Requests;
-import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
+import org.elasticsearch.index.IndexNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Created By Viking on 2020/3/9
+ * ES创建索引工具类
+ * Created By Viking on 2020/3/11
  */
-@Component
-public class EsIndexManageUtil {
+public class ESTransportClientIndexUtil {
     public static final int MIN_SHARDS = 5;// 默认的及最小分片数
     public static final int MID_SHARDS = 10;// 中型数量级别分片数
     public static final int MAX_SHARDS = 20;// 大型数量级别分片数
@@ -39,39 +32,6 @@ public class EsIndexManageUtil {
     private static Logger log = LoggerFactory.getLogger(EsIndexManageUtil.class);
     private static List<String> fieldTypes = Arrays.asList("boolean","byte","short","int","integer","float","double","long","string","date");
 
-    private static Map<String,Integer> HOSTMAP;
-//    @Value("elasticsearch.hostMap")
-    private Map<String,Integer> hostMap;
-
-
-    @PostConstruct
-    public void init(){
-        EsIndexManageUtil.HOSTMAP = new HashMap<>();
-        HOSTMAP.put("172.16.2.81",9300);
-    }
-
-    public static Client getClient(){
-        //        创建settings对象
-        Settings settings = Settings.builder()
-                .put("cluster.name","my-application")
-                .build();
-//        创建客户端对象
-        TransportClient client = new PreBuiltTransportClient(settings);
-        try {
-            TransportAddress[] transportAddress = new TransportAddress[HOSTMAP.size()];
-            List<TransportAddress> addressList = new ArrayList<>();
-            int index = 0;
-            for (String ip : HOSTMAP.keySet()) {
-                transportAddress[index++] = new TransportAddress(InetAddress.getByName(ip), HOSTMAP.get(ip));
-            }
-            client.addTransportAddresses(transportAddress);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-//        关闭资源
-//        client.close();
-        return client;
-    }
 
 
     /**
@@ -94,7 +54,7 @@ public class EsIndexManageUtil {
                     .build();
             indexName = indexName.toLowerCase() + "_" + format.format(new Date());
 
-            getClient().admin().indices().prepareCreate(indexName).setSettings(settings).execute().actionGet();
+            TransportClientHelper.getInstance().getClient().admin().indices().prepareCreate(indexName).setSettings(settings).execute().actionGet();
             XContentBuilder contentBuilder = XContentFactory.jsonBuilder().startObject().startObject(type).startObject("properties");
 
             for (Map<String,String> column : columnList) {
@@ -116,7 +76,7 @@ public class EsIndexManageUtil {
             contentBuilder.endObject().endObject().endObject();
 
             PutMappingRequest mapping = Requests.putMappingRequest(indexName).type(type).source(contentBuilder);
-            PutMappingResponse response = getClient().admin().indices().putMapping(mapping).actionGet();
+            PutMappingResponse response = TransportClientHelper.getInstance().getClient().admin().indices().putMapping(mapping).actionGet();
             boolean success = response.isAcknowledged();
 //            if (success) {
 //                int result = DBUtils.insertEsCreatedIndex(tableName,indexName, type);
@@ -150,5 +110,18 @@ public class EsIndexManageUtil {
     }
     public static boolean createNewIndex(String tableName,String indexName, String type, Class clazz){
         return createNewIndex(tableName,indexName,type,MIN_SHARDS,REPLICAS,clazz,null);
+    }
+
+    public static boolean deleteIndex(String indexName){
+        try {
+            DeleteIndexRequest request = new DeleteIndexRequest(indexName);
+            DeleteIndexResponse response = TransportClientHelper.getInstance().getClient().admin().indices().delete(request).actionGet();
+            boolean success = response.isAcknowledged();
+            System.out.println("删除是否成功?"+success);
+            return success;
+        }catch (IndexNotFoundException e){
+            System.out.println("索引不存在~");
+        }
+        return Boolean.FALSE;
     }
 }
