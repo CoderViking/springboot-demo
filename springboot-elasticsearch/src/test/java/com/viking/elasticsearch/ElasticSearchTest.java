@@ -160,7 +160,7 @@ public class ElasticSearchTest  {
     }
     @Test// 测试es的使用，插入数据为例
     public void testClient(){
-        RestHighLevelClient client = RestClientHelper.getInstance().getClient();
+        RestHighLevelClient client = RestClientHelper.getClient();
         IndexRequest indexRequest = new IndexRequest("blog", "java","index_08");
 
         Map<String, Object> blogMap = new HashMap<>();
@@ -181,7 +181,7 @@ public class ElasticSearchTest  {
 
     @Test// 测试es的同步方法增删改查
     public void crudTestInEs() throws IOException {
-        RestHighLevelClient client = RestClientHelper.getInstance().getClient();
+        RestHighLevelClient client = RestClientHelper.getClient();
         Map<String, Object> blogMap = new HashMap<>();
         blogMap.put("id", "index_08");
         blogMap.put("title", "测试SpringBoot中使用RestHighLevelClient连接es");
@@ -228,7 +228,7 @@ public class ElasticSearchTest  {
     }
     @Test
     public void crudAsync(){
-        RestHighLevelClient client = RestClientHelper.getInstance().getClient();
+        RestHighLevelClient client = RestClientHelper.getClient();
         // 增
         IndexRequest indexRequest = new IndexRequest("指定Index","指定type","指定id");
         indexRequest.source();

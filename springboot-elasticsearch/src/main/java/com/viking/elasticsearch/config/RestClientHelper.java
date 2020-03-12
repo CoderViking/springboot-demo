@@ -1,5 +1,6 @@
 package com.viking.elasticsearch.config;
 
+import com.viking.elasticsearch.elasticsearch.transportclient.EsIndexManageUtil;
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -36,18 +37,34 @@ public class RestClientHelper {
 //    }
 
     //静态内部类实现的单例模式
-    private static class RestClientHelperInstance {
-        // 外部类的单例对象
-        private static final RestClientHelper INSTANCE = new RestClientHelper();
-        // ES客户端的单例对象
-        private static final RestHighLevelClient CLIENT = new RestHighLevelClient(RestClient.builder(parseHost(ES_HOST)));
+//    private static class RestClientHelperInstance {
+//        // 外部类的单例对象
+//        private static final RestClientHelper INSTANCE = new RestClientHelper();
+//        // ES客户端的单例对象
+//        private static final RestHighLevelClient CLIENT = new RestHighLevelClient(RestClient.builder(parseHost(ES_HOST)));
+//    }
+//    public static RestClientHelper getInstance(){
+//        return RestClientHelperInstance.INSTANCE;
+//    }
+//    public RestHighLevelClient getClient(){
+//        return RestClientHelperInstance.CLIENT;
+//    }
+    //枚举实现的单例模式
+    private static enum SingleTonEnum{
+        INSTANCE;
+        private RestHighLevelClient client;
+        SingleTonEnum(){
+            client = new RestHighLevelClient(RestClient.builder(parseHost(ES_HOST)));
+        }
+        private RestHighLevelClient getInstance(){
+            return client;
+        }
     }
-    public static RestClientHelper getInstance(){
-        return RestClientHelperInstance.INSTANCE;
+    public static RestHighLevelClient getClient(){
+        return SingleTonEnum.INSTANCE.getInstance();
     }
-    public RestHighLevelClient getClient(){
-        return RestClientHelperInstance.CLIENT;
-    }
+
+
     private static HttpHost[] parseHost(String[] hosts) {
         assert hosts!=null;
         List<HttpHost> list = new ArrayList<>();

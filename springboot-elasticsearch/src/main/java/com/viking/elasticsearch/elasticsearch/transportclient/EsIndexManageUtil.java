@@ -1,11 +1,15 @@
 package com.viking.elasticsearch.elasticsearch.transportclient;
 
 import com.viking.elasticsearch.config.TransportClientHelper;
+import com.viking.elasticsearch.elasticsearch.restclient.ESRestClientIndexUtil;
+import org.apache.http.HttpHost;
 import org.elasticsearch.action.DocWriteResponse;
 import org.elasticsearch.action.admin.indices.mapping.put.PutMappingRequest;
 import org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.Requests;
+import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.io.stream.StreamInput;
 import org.elasticsearch.common.io.stream.StreamOutput;
@@ -33,49 +37,35 @@ import java.util.*;
  */
 //@Component
 public class EsIndexManageUtil {
-    public static enum Result implements Writeable {
-        CREATED(0),
-        UPDATED(1),
-        DELETED(2),
-        NOT_FOUND(3),
-        NOOP(4);
-
-        private final byte op;
-        private final String lowercase;
-
-        private Result(int op) {
-            this.op = (byte)op;
-            this.lowercase = this.toString().toLowerCase(Locale.ENGLISH);
+    private static final String[] ES_HOST = {};
+    private EsIndexManageUtil(){}
+    private static enum SingleTonEnum{
+        INSTANCE;
+        private RestHighLevelClient client;
+        SingleTonEnum(){
+            client = new RestHighLevelClient(RestClient.builder(parseHost(ES_HOST)));
         }
-
-        public byte getOp() {
-            return this.op;
+        private RestHighLevelClient getInstance(){
+            return client;
         }
+    }
+    public static RestHighLevelClient getInstance(){
+        return SingleTonEnum.INSTANCE.getInstance();
+    }
 
-        public String getLowercase() {
-            return this.lowercase;
-        }
-
-        public static Result readFrom(StreamInput in) throws IOException {
-            Byte opcode = in.readByte();
-            switch(opcode) {
-                case 0:
-                    return CREATED;
-                case 1:
-                    return UPDATED;
-                case 2:
-                    return DELETED;
-                case 3:
-                    return NOT_FOUND;
-                case 4:
-                    return NOOP;
-                default:
-                    throw new IllegalArgumentException("Unknown result code: " + opcode);
+    private static HttpHost[] parseHost(String[] hosts) {
+        assert hosts!=null;
+        List<HttpHost> list = new ArrayList<>();
+        for (String host : hosts){
+            if (host.split(":").length == 2){
+                String ip = host.split(":")[0];
+                int port = Integer.parseInt(host.split(":")[1]);
+                list.add(new HttpHost(ip,port,"http"));
             }
         }
-
-        public void writeTo(StreamOutput out) throws IOException {
-            out.writeByte(this.op);
-        }
+        HttpHost[] result = new HttpHost[list.size()];
+        assert result.length != 0;
+        System.out.println("=============ES客户端初始化完成~"+ list);
+        return list.toArray(result);
     }
 }
