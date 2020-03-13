@@ -1,6 +1,5 @@
 package com.viking.elasticsearch.config;
 
-import com.viking.elasticsearch.elasticsearch.transportclient.EsIndexManageUtil;
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -50,7 +49,7 @@ public class RestClientHelper {
 //        return RestClientHelperInstance.CLIENT;
 //    }
     //枚举实现的单例模式
-    private static enum SingleTonEnum{
+    private enum SingleTonEnum{
         INSTANCE;
         private RestHighLevelClient client;
         SingleTonEnum(){

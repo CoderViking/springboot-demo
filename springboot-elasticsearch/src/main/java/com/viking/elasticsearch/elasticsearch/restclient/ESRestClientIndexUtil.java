@@ -81,8 +81,6 @@ public class ESRestClientIndexUtil {
                     .put("index.number_of_shards", 1)
                     .put("index.number_of_replicas", 0)
                     .put("max_result_window",10000000)
-//                    .put("match_mapping_type","string")
-//                    .put("mapping","{\"type\": \"text\"}")
             );
             request.mapping(type,contentBuilder);
             CreateIndexResponse response = RestClientHelper.getClient().indices().create(request);

@@ -62,7 +62,7 @@ public class ElasticSearchTest  {
 
     @Test
     public void deleteIndex(){
-        ESRestClientIndexUtil.deleteIndex("rest_02");
+        ESRestClientIndexUtil.deleteIndex("book");
 //        ESTransportClientIndexUtil.deleteIndex("transportclient_20031017");
     }
     @Test
