@@ -2,9 +2,8 @@ package com.viking.elasticsearch.elasticsearch.transportclient;
 
 import com.viking.elasticsearch.config.TransportClientHelper;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
-import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
 import org.elasticsearch.action.admin.indices.mapping.put.PutMappingRequest;
-import org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse;
+import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.client.Requests;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.xcontent.XContentBuilder;
@@ -76,7 +75,7 @@ public class ESTransportClientIndexUtil {
             contentBuilder.endObject().endObject().endObject();
 
             PutMappingRequest mapping = Requests.putMappingRequest(indexName).type(type).source(contentBuilder);
-            PutMappingResponse response = TransportClientHelper.getInstance().getClient().admin().indices().putMapping(mapping).actionGet();
+            AcknowledgedResponse response = TransportClientHelper.getInstance().getClient().admin().indices().putMapping(mapping).actionGet();
             boolean success = response.isAcknowledged();
 //            if (success) {
 //                int result = DBUtils.insertEsCreatedIndex(tableName,indexName, type);
@@ -115,7 +114,7 @@ public class ESTransportClientIndexUtil {
     public static boolean deleteIndex(String indexName){
         try {
             DeleteIndexRequest request = new DeleteIndexRequest(indexName);
-            DeleteIndexResponse response = TransportClientHelper.getInstance().getClient().admin().indices().delete(request).actionGet();
+            AcknowledgedResponse response = TransportClientHelper.getInstance().getClient().admin().indices().delete(request).actionGet();
             boolean success = response.isAcknowledged();
             System.out.println("删除是否成功?"+success);
             return success;

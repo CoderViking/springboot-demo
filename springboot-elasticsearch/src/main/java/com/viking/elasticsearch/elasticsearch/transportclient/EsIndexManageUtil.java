@@ -1,35 +1,8 @@
 package com.viking.elasticsearch.elasticsearch.transportclient;
 
-import com.viking.elasticsearch.config.TransportClientHelper;
-import com.viking.elasticsearch.elasticsearch.restclient.ESRestClientIndexUtil;
 import org.apache.http.HttpHost;
-import org.elasticsearch.action.DocWriteResponse;
-import org.elasticsearch.action.admin.indices.mapping.put.PutMappingRequest;
-import org.elasticsearch.action.admin.indices.mapping.put.PutMappingResponse;
-import org.elasticsearch.client.Client;
-import org.elasticsearch.client.Requests;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.io.stream.StreamInput;
-import org.elasticsearch.common.io.stream.StreamOutput;
-import org.elasticsearch.common.io.stream.Writeable;
-import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.TransportAddress;
-import org.elasticsearch.common.xcontent.XContentBuilder;
-import org.elasticsearch.common.xcontent.XContentFactory;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
-
-import javax.annotation.PostConstruct;
-import java.io.IOException;
-import java.lang.reflect.Field;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
