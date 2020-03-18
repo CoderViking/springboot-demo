@@ -3,9 +3,9 @@ package com.viking.elasticsearch.elasticsearch.restclient;
 import com.viking.elasticsearch.config.RestClientHelper;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.DocWriteResponse;
-import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
-import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
+import org.elasticsearch.action.admin.indices.alias.Alias;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
+import org.elasticsearch.action.admin.indices.settings.put.UpdateSettingsRequest;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.*;
@@ -17,6 +17,7 @@ import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.indices.*;
 import org.elasticsearch.common.Strings;
 import org.elasticsearch.common.bytes.BytesArray;
 import org.elasticsearch.common.settings.Settings;
@@ -26,6 +27,7 @@ import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.index.VersionType;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchAllQueryBuilder;
+import org.elasticsearch.index.reindex.AbstractBulkByScrollRequest;
 import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.ReindexRequest;
 import org.elasticsearch.index.reindex.RemoteInfo;
@@ -56,14 +58,21 @@ public class ESRestClientIndexUtil {
     /**
      * 创建ES索引
      * @param indexName 索引名称
-     * @param type 索引类型（可忽略）
+     * @param alias 索引别称
      * @param columnList 列名称和类型
      * @return 创建是否成功
      */
-    public static boolean createIndex(@NonNull String indexName, @NonNull String type, @NonNull List<Map<String,String>> columnList){
-        System.out.println(RestClientHelper.getClient());
+    public static boolean createIndex(@NonNull String indexName, @Nullable String alias, @NonNull List<Map<String,String>> columnList){
         try {
-        XContentBuilder contentBuilder = XContentFactory.jsonBuilder().startObject().startObject(type).startObject("properties");
+            // 先判断该索引名称是否已经存在
+            GetIndexRequest existsRequest = new GetIndexRequest(indexName);
+            boolean exists = RestClientHelper.getClient().indices().exists(existsRequest, RequestOptions.DEFAULT);
+            if (exists){
+                System.out.println("索引["+indexName+"]已存在，创建失败~");
+                return Boolean.FALSE;
+            }
+            // 映射索引的mapping
+            XContentBuilder contentBuilder = XContentFactory.jsonBuilder().startObject().startObject("properties");
             for (Map<String,String> column : columnList) {
                 if (!fieldTypes.contains(column.get("type").toLowerCase())) continue;
                 contentBuilder.startObject(column.get("name"));
@@ -86,17 +95,42 @@ public class ESRestClientIndexUtil {
 //                    contentBuilder.field("index", true).endObject();
                 }
             }
-            contentBuilder.endObject().endObject().endObject();
-
-            Map<String,String> map = new HashMap<>();
-            map.put("type","text");
+            contentBuilder.endObject().endObject();
+            // 创建索引
             CreateIndexRequest request = new CreateIndexRequest(indexName);
-            request.settings(Settings.builder()
+            // 配置索引相关的设置
+            request.settings(Settings.builder()/*.putProperties()*/
                     .put("index.number_of_shards", 5)
                     .put("index.number_of_replicas", 0)
-                    .put("max_result_window",10000000)
+                    .put("index.max_result_window",10000000)
+
+//                    .put("index.analysis",new HashMap<>())
+/** "index": {
+    "number_of_shards": "10",
+    "max_result_window": "100000000",
+    "creation_date": "1516940588517",
+    "analysis": {
+      "analyzer": {
+        "uppercase": {
+          "filter": "uppercase",
+          "type": "custom",
+          "tokenizer": "standard"
+        },
+        "my_analyzer": {
+          "tokenizer": "my_tokenizer"
+        }
+      },
+      "tokenizer": {
+        "my_tokenizer": {
+          "pattern": ";",
+          "type": "pattern"
+        }
+      }
+    }
+  }*/
             );
-            request.mapping(type,contentBuilder);
+            request.mapping(contentBuilder);
+            if (!Strings.isNullOrEmpty(alias)) request.alias(new Alias(alias));
             CreateIndexResponse response = RestClientHelper.getClient().indices().create(request, RequestOptions.DEFAULT);
             boolean success = response.isAcknowledged();
             System.out.println("是否创建成功?"+success);
@@ -127,6 +161,48 @@ public class ESRestClientIndexUtil {
             e.printStackTrace();
         }
         return Boolean.FALSE;
+    }
+
+    /**
+     * 修改索引的设置
+     * @param indexName 索引名称
+     * @return 是否修改成功
+     */
+    public static boolean updateIndexSetting(String indexName){
+        UpdateSettingsRequest request = new UpdateSettingsRequest(indexName);
+        request.settings(Settings.builder().put("index.blocks.write",true));
+        try {
+            AcknowledgedResponse response = RestClientHelper.getClient().indices().putSettings(request, RequestOptions.DEFAULT);
+            System.out.println("修改索引设置是否操作成功？" + response.isAcknowledged());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Boolean.TRUE;
+    }
+
+    /**
+     * 缩小索引，将原先的索引缩小为另一个新的索引，
+     * 新索引的分片数必须是原索引分片数的因数，
+     * 如果原索引的分片数为质数，则新索引的分片数只能是1和原索引分片数本身
+     * @param targetIndex 目标索引
+     * @param sourceIndex 原始索引
+     * @return 是否操作成功
+     */
+    public static boolean shrinkIndex(String targetIndex, String sourceIndex){
+        updateIndexSetting(sourceIndex);
+        ResizeRequest request = new ResizeRequest(targetIndex, sourceIndex);
+        request.setSettings(Settings.builder()
+                .put("index.number_of_shards",5)
+                .put("index.number_of_replicas", 0)
+                .build());
+        try {
+            ResizeResponse response = RestClientHelper.getClient().indices().shrink(request, RequestOptions.DEFAULT);
+            boolean success = response.isAcknowledged();
+            System.out.println("缩小索引操作是否成功?" + success);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Boolean.TRUE;
     }
 
     /**
@@ -178,7 +254,7 @@ public class ESRestClientIndexUtil {
      * @return 是否成功
      */
     public static boolean updateDoc(String indexName, String esId, Map<String, Object> jsonMap){
-        UpdateRequest request = new UpdateRequest("posts","1").upsert(jsonMap);
+        UpdateRequest request = new UpdateRequest(indexName,esId).upsert(jsonMap);
         try {
             UpdateResponse response = RestClientHelper.getClient().update(request, RequestOptions.DEFAULT);
             System.out.println("状态码:" + response.status().getStatus());
@@ -233,10 +309,10 @@ public class ESRestClientIndexUtil {
     }
 
     /**
-     *
-     * @param indexName
-     * @param esId
-     * @return
+     * 验证指定esId的文档是否存在
+     * @param indexName 索引名称
+     * @param esId esId
+     * @return 查询结果
      */
     public static boolean existsDoc(String indexName, String esId){
         GetRequest request = new GetRequest(indexName,esId);
@@ -248,35 +324,49 @@ public class ESRestClientIndexUtil {
         return Boolean.FALSE;
     }
 
-    public static boolean reIndexDoc(){
+    /**
+     * 重新索引，es数据迁移
+     * @param sourceIndex 源索引名称集合
+     * @param targetIndex 目标索引名称
+     * @param host 远程es集群主机地址
+     * @param port 远程es集权主机端口
+     * @return 操作是否成功
+     */
+    public static boolean reIndexDoc(String[] sourceIndex, String targetIndex, String host, int port){
         ReindexRequest request = new ReindexRequest();
-        request.setSourceIndices("tmof_zqdj");//设置源索引名称(一个或多个)
-        request.setDestIndex("new_zq");//设置目标索引名称
+        request.setSourceIndices(sourceIndex);//设置源索引名称(一个或多个)
+        request.setDestIndex(targetIndex);//设置目标索引名称
         request.setDestVersionType(VersionType.EXTERNAL);
         request.setDestOpType("create");
-
+        request.setSourceBatchSize(10000);// 批量处理文档数量
+//        request.setSlices(10);
+        request.setTimeout(TimeValue.timeValueMinutes(2));
+        request.setRefresh(true);// 迁移完成后是否刷新索引
+        request.setTimeout(new TimeValue(100, TimeUnit.SECONDS));
         request.setRemoteInfo(
                 new RemoteInfo(
-                        "http", "172.15.5.160", 9200, null,
+                        "http", host, port, null,
                         new BytesArray(new MatchAllQueryBuilder().toString()),
                         null, null, Collections.emptyMap(),
-                        new TimeValue(100, TimeUnit.MILLISECONDS),
+                        new TimeValue(100, TimeUnit.SECONDS),
                         new TimeValue(100, TimeUnit.SECONDS)
                 )
         );
+
         try {
+            long start = System.currentTimeMillis();
             BulkByScrollResponse bulkResponse =
                     RestClientHelper.getClient().reindex(request, RequestOptions.DEFAULT);
             long total = bulkResponse.getTotal();
-            System.out.println("总计转移数据量:" + total);
+            System.out.println("总计转移数据量:" + total + "\t总共耗时约: "+ (System.currentTimeMillis() - start)/1000 + "秒");
             return Boolean.TRUE;
         } catch (IOException e) {
             e.printStackTrace();
         }
         return Boolean.FALSE;
     }
-    public static GetResponse get(@NonNull String indexName, @NonNull String type, @NonNull String esId){
-        GetRequest getRequest = new GetRequest(indexName,type,esId);
+    public static GetResponse get(@NonNull String indexName, @NonNull String esId){
+        GetRequest getRequest = new GetRequest(indexName,esId);
         try {
             GetResponse response = RestClientHelper.getClient().get(getRequest, RequestOptions.DEFAULT);
             Map<String, Object> map = response.getSourceAsMap();
@@ -290,7 +380,7 @@ public class ESRestClientIndexUtil {
     public static SearchResponse search(@NonNull String indexName, @NonNull String type, @Nullable Integer from,
                                         @Nullable Integer size, @Nullable String[] fields, @Nullable String[] excludeFields,
                                         @Nullable String sortField, @Nullable SortOrder sortOrder, @NonNull BoolQueryBuilder boolQuery){
-        assertCondition(indexName,type,boolQuery);
+        assertCondition(indexName,null,boolQuery);
         SearchSourceBuilder builder = new SearchSourceBuilder();
         if (from != null) builder.from(from);
         if (size != null) builder.size(size);
@@ -298,7 +388,6 @@ public class ESRestClientIndexUtil {
         if (!Strings.isNullOrEmpty(sortField) && sortOrder != null) builder.sort(sortField,sortOrder);
         builder.query(boolQuery);
         SearchRequest searchRequest = new SearchRequest(indexName);
-        searchRequest.types(type);
         searchRequest.source(builder);
         try {
             SearchResponse response = RestClientHelper.getClient().search(searchRequest, RequestOptions.DEFAULT);
@@ -452,7 +541,7 @@ public class ESRestClientIndexUtil {
 //    }
     private static void assertCondition(String indexName, String type, BoolQueryBuilder boolQuery){
         Assert.notNull(indexName,"ES索引名称不能为空");
-        Assert.notNull(type,"ES索引类型不能为空");
+//        Assert.notNull(type,"ES索引类型不能为空");
         Assert.notNull(boolQuery,"查询条件不能为空");
     }
 }

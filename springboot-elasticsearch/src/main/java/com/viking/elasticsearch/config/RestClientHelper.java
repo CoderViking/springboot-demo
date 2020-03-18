@@ -1,7 +1,10 @@
 package com.viking.elasticsearch.config;
 
 import org.apache.http.HttpHost;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.client.RestClient;
+import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -53,7 +56,11 @@ public class RestClientHelper {
         INSTANCE;
         private RestHighLevelClient client;
         SingleTonEnum(){
-            client = new RestHighLevelClient(RestClient.builder(parseHost(ES_HOST)));
+            client = new RestHighLevelClient(RestClient.builder(parseHost(ES_HOST)).setRequestConfigCallback(builder -> {
+                builder.setConnectTimeout(30000)// 更改客户端的连接超时时间默认1秒现在改为30秒
+                        .setSocketTimeout(20601000);//更改客户端的socket连接超时限制默认30秒现在改为20分钟
+                return builder;
+            }));
         }
         private RestHighLevelClient getInstance(){
             return client;

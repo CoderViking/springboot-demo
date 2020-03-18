@@ -62,8 +62,12 @@ public class ElasticSearchTest  {
 
     @Test
     public void deleteIndex(){
-        ESRestClientIndexUtil.deleteIndex("new_zq");
+        ESRestClientIndexUtil.deleteIndex("cn_xz_area");
 //        ESTransportClientIndexUtil.deleteIndex("transportclient_20031017");
+    }
+    @Test
+    public void shrinkIndex(){
+        ESRestClientIndexUtil.shrinkIndex("area_copy","cn_xz_area");
     }
     @Test
     public void createIndex(){
@@ -77,7 +81,7 @@ public class ElasticSearchTest  {
         Map<String,String> field8 = new HashMap<>();field8.put("name","cp");field8.put("type","keyword");// cp对象
         Map<String,String> field9 = new HashMap<>();field9.put("name","status");field9.put("type","keyword");// 神体状态
         List<Map<String,String>> columnList = Arrays.asList(field1,field2,field3,field4,field5,field6,field7,field8,field9);
-        ESRestClientIndexUtil.createIndex("super_seminary","earth",columnList);
+        ESRestClientIndexUtil.createIndex("super_seminary","chaoshen",columnList);
     }
     @Test
     public void insertDoc(){
@@ -96,7 +100,24 @@ public class ElasticSearchTest  {
 //        list.add(loadMap("右翼·炙心","烈火战神",0,null,"天使星云·神圣护卫","赵信","第三代超级战士","第三季被凯莎女王许配给赵信，自身为虚空战士，改写了赵信的基因使其可以击败虚空战士，改写完之后，失去天使之力，自称不再是天使，没有了翅膀。只是是变成普通人了还是进化为完全的虚空战士还不得而知。"));
 //        list.add(loadMap("孙悟空","斗战胜佛",1,null,null,"苏小狸","第三代超级战士","沉睡于神话中的一段超级基因密码，接近神的超级战士，在这段基因密码中，吴老师偷偷植入了对阿狸的记忆。而后被死歌破解密码并将其召唤出来。"));
 //        list.add(loadMap("苏小狸",null,0,null,"超神学院·地球防务·雄兵连","孙悟空","第二代超级战士，擅长魅惑的战斗妖精","她不爱这个国家，不爱她的祖辈，不爱她的家人，就是他们，赐予她这一切，漫漫无常的等待，有人跟她说，让她全身充满魔力，给她找个伟岸的真男人。就这样，一个荒唐的交换条件，她加入了超神学院。"));
-        list.add(loadMap("莫甘娜","堕落女王、自由与梦想之神",0,null,"恶魔星云",null,"由第二代超级战士晋升为第三代超级战士","同样来自古老强大的天使文明，不知名的原因出走天使星云，曾经是超神学院的导师，和基兰校长把酒言欢，探讨学术；后因理念不同再次出走，并且做了一生最大的转折，向自己的母星宣战，物是人非，此时天使星云的最高统治者就是自己曾经的姐姐凯莎，战争长达万年之久。"));
+//        list.add(loadMap("莫甘娜","堕落女王、自由与梦想之神",0,null,"恶魔星云",null,"由第二代超级战士晋升为第三代超级战士","同样来自古老强大的天使文明，不知名的原因出走天使星云，曾经是超神学院的导师，和基兰校长把酒言欢，探讨学术；后因理念不同再次出走，并且做了一生最大的转折，向自己的母星宣战，物是人非，此时天使星云的最高统治者就是自己曾经的姐姐凯莎，战争长达万年之久。"));
+//        list.add(loadMap("丁格黑",null,1,null,"神河文明",null,null,"生活在神河的伟大科学家，宇宙历史长河中的传说，从来没有被超越，时光神基兰和大时钟的创造者，一生致力于科学研究，虽然一直希望能够探索浩瀚无垠的宇宙，但是在神河星系爆炸的时候选择了一同湮灭。"));
+//        list.add(loadMap("泰·史奈夫",null,1,null,"弗雷卓文明·北方霸王",null,null,"处于冷兵器时代的费雷卓文明，正处在南北混战时期，而北方的各大蛮夷部落，他们各自信仰自己的神或图腾，其中的一只，史奈夫族，是北方名族最强大的一支。泰·史奈夫则是新一代的王者，但目前来看，除了为自己的信仰南征北战彰显蛮威，并没有太多成就。他们信仰的是时光神。"));
+//        list.add(loadMap("艾妮·熙德",null,0,null,"弗雷卓文明·冰雪王国",null,null,"处于冷兵器时代的费雷卓文明，参考《艾妮·熙德传奇》，从一介平民，和几个年轻的勇士一起，通过长达10年的战争，将南方各大城邦势力统一成一个最伟大的王国，而指引他们赢得胜利的正是审判天使的伟大信仰。他们在弗雷卓南部开创了新的骑士时代，将弗雷卓从野蛮带入了文明。（《艾妮·熙德传奇》将在不久后以超神学院系列之作登场。）"));
+//        list.add(loadMap("索顿","鳄神",1,null,null,null,"神级","自称是地球上的神，亦正亦邪，在异空间被莫甘娜破译召唤出来，可能时代过于久远，对这个新世界充满新鲜感，卖萌，搞笑，缓解气氛，搔首踟蹰，每次出场都是抢镜的亮点，据说还有个兄弟。"));
+//        list.add(loadMap("杜卡奥",null,1,"上将","超神学院·地球防务·雄兵连总指挥官",null,null,"杜蔷薇父亲，原诺星上将，发动过德诺星系的战争，战绩被载入宇宙史册，并在其他文明中广为流传，包括古老的天使文明之中。神河1000元年，把程耀文带到地球，并且是地球基因实验的策划者之一，监控着被挑选中的超级战士的一举一动。"));
+//        list.add(loadMap("钊",null,1,"中士","超神学院·地球防务·女神队",null,null,"持剑的超级战士，会使用所谓的无极剑道。目前和菲菲前往北之星。属于第二代超级战士"));
+//        list.add(loadMap("黑风",null,1,null,"恶魔星云",null,null,"莫甘娜曾经一手打造的梦境超级战士，用于从精神上打击天使集团的高能力者，也是跟随莫甘娜征战万年的老战友。"));
+//        list.add(loadMap("剑魔·阿托","上古剑魔",1,null,"恶魔星云",null,"由第二代超级战士升级为第三代超级战士","一个跟随了莫甘娜万年之久的老指挥官。在与雄兵连一战后，被莫甘娜培养成为弑神级战士，也是莫甘娜手下最强大的神级战士。为了自己的女王，可以轻易屠杀泰·史奈夫的族人，毫不手软。已进化为神体"));
+//        list.add(loadMap("卡尔","死神",1,null,"黑暗星云",null,null,"暗影世界的领袖，原超神学院的导师。专注于研究从超神时代打开终极恐惧之门，进入虚空世界，但仍然在诸神之间周旋。他坚持的理念，让曾经繁华的星球变成死亡之国。"));
+//        list.add(loadMap("凯莎","天使之王",0,null,"天使星云",null,"由第二代超级战士晋升为第三代超级战士","弘扬天使既正义的理念，几乎从信仰上统治了所有主流文明。天使星云的王者，宇宙已知文明的最高神。现已陨落。需要三忆年复活"));
+//        list.add(loadMap("杰古斯丁",null,1,null,"超神学院·地球防务·雄兵连",null,"第一代超级战士","超神学院 地球防务 雄兵连大队长。他是个杰出的指挥官，指挥过震惊世界的阿布拉拉行动，后被流老师召唤到地球，担任雄兵连的军事教官"));
+//        list.add(loadMap("语琴",null,0,null,"超神学院指挥部",null,"第一代超级战士","超神学院指挥部 医疗官。能够远程给受伤的战士进行修复，第三季中被恶魔劫持，状况不明。"));
+//        list.add(loadMap("怜风",null,0,null,"超神学院指挥部",null,"第一代超级战士","超神学院指挥部 情报分析员"));
+//        list.add(loadMap("魏颖","暗影猎手",0,null,"超神学院·地球防务·雄兵连",null,null,"弑神之力的另一个拥有者，德星第二代造神工程的产物，属于第二代超级战士其实力让莫甘娜十分忌惮。"));
+//        list.add(loadMap("李菲菲",null,0,"下士","超神学院·地球防务·雄兵连",null,"德星第二代超级战士",null));
+//        list.add(loadMap("潘震",null,1,null,"烈阳星",null,null,"超神学院 烈阳星 太阳神守护者"));
+
         for (Map<String, Object> bean : list) {
             ESRestClientIndexUtil.insertDoc(indexName,bean.get("hid").toString(),bean);
         }
@@ -135,28 +156,40 @@ public class ElasticSearchTest  {
 //        Map<String,String> field9 = new HashMap<>();field9.put("name","ed");field9.put("type","long");// 神体状态
 //        List<Map<String,String>> columnList = Arrays.asList(field1,field2,field3,field4,field5,field6,field7,field8,field9);
 //        ESRestClientIndexUtil.createIndex("new_zq","v1",columnList);
-        ESRestClientIndexUtil.reIndexDoc();
+
+        Map<String,String> field1 = new HashMap<>();field1.put("name","code");field1.put("type","long");// 名称
+        Map<String,String> field2 = new HashMap<>();field2.put("name","firstcode");field2.put("type","long");// 英雄编号
+        Map<String,String> field3 = new HashMap<>();field3.put("name","lvl");field3.put("type","long");// 称号
+        Map<String,String> field4 = new HashMap<>();field4.put("name","city");field4.put("type","keyword");// 性别
+        Map<String,String> field5 = new HashMap<>();field5.put("name","prv");field5.put("type","keyWord");// 军衔
+        Map<String,String> field6 = new HashMap<>();field6.put("name","cty");field6.put("type","keyword");//隶属
+        Map<String,String> field7 = new HashMap<>();field7.put("name","addr");field7.put("type","keyword");// 简介
+        Map<String,String> field8 = new HashMap<>();field8.put("name","type");field8.put("type","keyword");// cp对象
+        Map<String,String> field9 = new HashMap<>();field9.put("name","structure");field9.put("type","keyword");// 神体状态
+        List<Map<String,String>> columnList = Arrays.asList(field1,field2,field3,field4,field5,field6,field7,field8,field9);
+        ESRestClientIndexUtil.createIndex("cn_xz_area","area",columnList);
+
+        ESRestClientIndexUtil.reIndexDoc(new String[]{"util_area_v1"},"cn_xz_area","172.16.15.150",9200);
     }
     @Test
     public void getTest(){
         String indexName = "rest_01";
         String type = "type";
         String esId = "522f2bd9-81b7-4e69-aa1b-d3921e6b4298";
-        GetResponse response = ESRestClientIndexUtil.get(indexName, type, esId);
+        GetResponse response = ESRestClientIndexUtil.get(indexName, esId);
         Map<String, Object> map = response.getSourceAsMap();
         System.out.println(map);
     }
     @Test
     public void searchTest(){
-        String indexName = "rest_01";
+        String indexName = "super_seminary";
         String type = "type";
-        SearchRequest searchRequest = new SearchRequest(indexName);
-        searchRequest.types(type);
+
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-//        boolQueryBuilder.must(QueryBuilders.termQuery("ap","申请人的主要名称"));
-//        boolQueryBuilder.must(QueryBuilders.matchQuery("descript","地球"));//match暂时无法查询，原因时es的服务器版本和客户端版本不一致，6.0.0的服务器缺少对auto_generate_synonyms_phrase_query的支持
-        boolQueryBuilder.must(QueryBuilders.boolQuery().should(QueryBuilders.wildcardQuery("apad","*黄土高坡*").boost(10)));
-        SearchResponse response = ESRestClientIndexUtil.search(indexName, type, 0, 100, null, null, "apvu", SortOrder.DESC, boolQueryBuilder);
+//        boolQueryBuilder.must(QueryBuilders.termQuery("subjection","超神学院·地球防卫·雄兵连"));
+//        boolQueryBuilder.must(QueryBuilders.matchQuery("subjection","超神学院·地球防卫·雄兵连"));//match暂时无法查询，原因时es的服务器版本和客户端版本不一致，6.0.0的服务器缺少对auto_generate_synonyms_phrase_query的支持
+        boolQueryBuilder.must(QueryBuilders.boolQuery().should(QueryBuilders.wildcardQuery("intro.keyword","*地球*").boost(10)));
+        SearchResponse response = ESRestClientIndexUtil.search(indexName, type, 0, 100, null, null, "sex", SortOrder.DESC, boolQueryBuilder);
         if (response!=null) {
             for (SearchHit hit : response.getHits().getHits()) {
                 System.out.println(hit.getSourceAsString());
