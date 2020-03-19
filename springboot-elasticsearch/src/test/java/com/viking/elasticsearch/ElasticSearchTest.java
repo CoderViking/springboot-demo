@@ -4,7 +4,7 @@ import com.viking.elasticsearch.config.RestClientHelper;
 import com.viking.elasticsearch.elasticsearch.restclient.ESRestClientIndexUtil;
 import com.viking.elasticsearch.elasticsearch.transportclient.ESTransportClientIndexUtil;
 import org.elasticsearch.action.ActionListener;
-import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
+import org.elasticsearch.action.admin.indices.alias.Alias;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetRequest;
@@ -15,7 +15,13 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.indices.CreateIndexRequest;
+import org.elasticsearch.client.indices.CreateIndexResponse;
+import org.elasticsearch.client.indices.GetIndexRequest;
+import org.elasticsearch.common.Strings;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentBuilder;
@@ -46,7 +52,7 @@ import java.util.concurrent.TimeUnit;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ElasticSearchTest  {
-    private static List<String> fieldTypes = Arrays.asList("boolean","byte","short","int","integer","float","double","long","string","date");
+    private static List<String> fieldTypes = Arrays.asList("boolean","byte","short","int","integer","float","double","long","string","date","keyword","text");
 
     /*
     String类型，又分两种：
@@ -172,6 +178,100 @@ public class ElasticSearchTest  {
         ESRestClientIndexUtil.reIndexDoc(new String[]{"util_area_v1"},"cn_xz_area","172.16.15.150",9200);
     }
     @Test
+    public void createdAnalyzeIndex(){
+//        String indexName = "tm_ap_test";
+//        String alias = "ap";
+//        Map<String,String> field1 = new HashMap<>();field1.put("name","apvu");field1.put("type","long");// 名称
+//        Map<String,String> field2 = new HashMap<>();field2.put("name","clrq");field2.put("type","long");// 英雄编号
+//        Map<String,String> field3 = new HashMap<>();field3.put("name","oid");field3.put("type","text");field3.put("analyzer","my_analyzer");// 称号
+//        Map<String,String> field4 = new HashMap<>();field4.put("name","rid");field4.put("type","keyword");// 性别
+//        Map<String,String> field5 = new HashMap<>();field5.put("name","jyfw");field5.put("type","keyWord");// 军衔
+//        Map<String,String> field6 = new HashMap<>();field6.put("name","apovu");field6.put("type","long");//隶属
+//        Map<String,String> field7 = new HashMap<>();field7.put("name","apEn");field7.put("type","text");field7.put("analyzer","uppercase");// 简介
+//        Map<String,String> field8 = new HashMap<>();field8.put("name","gpjysc");field8.put("type","keyword");// cp对象
+//        Map<String,String> field9 = new HashMap<>();field9.put("name","sbsl");field9.put("type","long");// 神体状态
+//        Map<String,String> field10 = new HashMap<>();field10.put("name","cnty");field10.put("type","keyword");// 神体状态
+//        Map<String,String> field11 = new HashMap<>();field11.put("name","zcjg");field11.put("type","keyword");// 神体状态
+//        Map<String,String> field12 = new HashMap<>();field12.put("name","ctr");field12.put("type","keyword");// 神体状态
+//        Map<String,String> field13 = new HashMap<>();field13.put("name","hzrq");field13.put("type","long");// 神体状态
+//        Map<String,String> field14 = new HashMap<>();field14.put("name","apt");field14.put("type","long");// 神体状态
+//        Map<String,String> field15 = new HashMap<>();field15.put("name","apid");field15.put("type","keyword");// 神体状态
+//        Map<String,String> field16 = new HashMap<>();field16.put("name","cty");field16.put("type","keyword");// 神体状态
+//        Map<String,String> field17 = new HashMap<>();field17.put("name","zczb");field17.put("type","double");// 神体状态
+//        Map<String,String> field18 = new HashMap<>();field18.put("name","qygw");field18.put("type","keyword");// 神体状态
+//        Map<String,String> field19 = new HashMap<>();field19.put("name","ap");field19.put("type","text");field19.put("analyzer","uppercase");// 神体状态
+//        Map<String,String> field20 = new HashMap<>();field20.put("name","djzt");field20.put("type","keyword");// 神体状态
+//        Map<String,String> field21 = new HashMap<>();field21.put("name","xydm");field21.put("type","keyword");
+//        Map<String,String> field22 = new HashMap<>();field22.put("name","prv");field22.put("type","keyword");
+//        Map<String,String> field23 = new HashMap<>();field23.put("name","svol");field23.put("type","keyword");
+//        Map<String,String> field24 = new HashMap<>();field24.put("name","frdb");field24.put("type","keyword");
+//        Map<String,String> field25 = new HashMap<>();field25.put("name","apad");field25.put("type","keyword");
+//        List<Map<String,String>> columnList = Arrays.asList(field1,field2,field3,field4,field5,field6,field7,field8,field9,field10,field11,field12,
+//                field13,field14,field15,field16,field17,field18,field19,field20,field21,field22,field23,field24,field25);
+//        try {
+//            // 先判断该索引名称是否已经存在
+//            GetIndexRequest existsRequest = new GetIndexRequest(indexName);
+//            boolean exists = RestClientHelper.getClient().indices().exists(existsRequest, RequestOptions.DEFAULT);
+//            if (exists){
+//                ESRestClientIndexUtil.deleteIndex(indexName);
+//                System.out.println("索引["+indexName+"]已存在，创建失败~");
+////                return;
+//            }
+//            // 映射索引的mapping
+//            XContentBuilder contentBuilder = XContentFactory.jsonBuilder().startObject().startObject("properties");
+//            for (Map<String,String> column : columnList) {
+//                if (!fieldTypes.contains(column.get("type").toLowerCase())) continue;
+//                contentBuilder.startObject(column.get("name"));
+//                String fieldType = column.get("type").toLowerCase();
+//
+//                if (Arrays.asList("byte","short","int","integer","long","date").contains(fieldType)){
+//                    contentBuilder.field("type", "long").endObject();
+//                }else if (Arrays.asList("float","double").contains(fieldType)){
+//                    contentBuilder.field("type", "double").endObject();
+//                }else if ("boolean".equals(fieldType)){
+//                    contentBuilder.field("type", "boolean").endObject();
+//                }else if ("string".equals(fieldType)) {
+//                    contentBuilder.field("type", "keyword").endObject();
+//                }else if ("keyword".equals(fieldType)) {
+//                    contentBuilder.field("type", "keyword").endObject();
+//                }else {
+//                    if (column.containsKey("analyzer")){
+//                        contentBuilder.field("type", "text");
+//                        contentBuilder.field("analyzer",column.get("analyzer")).endObject();
+//                    }else {
+//                        contentBuilder.field("type", "text").endObject();
+//                    }
+//                }
+//            }
+//            contentBuilder.endObject().endObject();
+//            // 创建索引
+//            org.elasticsearch.client.indices.CreateIndexRequest request = new CreateIndexRequest(indexName);
+//            // 配置索引相关的设置
+//            request.settings(Settings.builder()
+//                    .put("index.number_of_shards", 10)
+//                    .put("index.number_of_replicas", 0)
+//                    .put("index.max_result_window",10000000)
+//                    // 配置自定义分词
+//                    .put("index.analysis.analyzer.uppercase.filter","uppercase")
+//                    .put("index.analysis.analyzer.uppercase.type","custom")
+//                    .put("index.analysis.analyzer.uppercase.tokenizer","standard")
+//                    .put("index.analysis.analyzer.my_analyzer.tokenizer","my_tokenizer")
+//                    .put("index.analysis.tokenizer.my_tokenizer.pattern",";")
+//                    .put("index.analysis.tokenizer.my_tokenizer.type","pattern")
+//            );
+//            request.mapping(contentBuilder);
+//            if (!Strings.isNullOrEmpty(alias)) request.alias(new Alias(alias));
+//            CreateIndexResponse response = RestClientHelper.getClient().indices().create(request, RequestOptions.DEFAULT);
+//            boolean success = response.isAcknowledged();
+//            System.out.println("是否创建成功?"+success);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+
+        ESRestClientIndexUtil.reIndexDoc(new String[]{"tm_info"},"tm_info","172.16.15.150",9200);
+    }
+    @Test
     public void getTest(){
         String indexName = "rest_01";
         String type = "type";
@@ -182,31 +282,51 @@ public class ElasticSearchTest  {
     }
     @Test
     public void searchTest(){
-        String indexName = "super_seminary";
+        String indexName = "tm_info_new";
         String type = "type";
 
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-//        boolQueryBuilder.must(QueryBuilders.termQuery("subjection","超神学院·地球防卫·雄兵连"));
+        boolQueryBuilder.must(QueryBuilders.termQuery("grp","2013"));
+//        boolQueryBuilder.must(QueryBuilders.termQuery("grp","3501"));
+//        boolQueryBuilder.should(QueryBuilders.matchPhraseQuery("ap","瑞萌舒乐工业公司"));
+//        boolQueryBuilder.should(QueryBuilders.matchPhraseQuery("apEn","INDUSTRIAS RAMON SOLER,S.A."));
+//        boolQueryBuilder.minimumShouldMatch(1);
 //        boolQueryBuilder.must(QueryBuilders.matchQuery("subjection","超神学院·地球防卫·雄兵连"));//match暂时无法查询，原因时es的服务器版本和客户端版本不一致，6.0.0的服务器缺少对auto_generate_synonyms_phrase_query的支持
-        boolQueryBuilder.must(QueryBuilders.boolQuery().should(QueryBuilders.wildcardQuery("intro.keyword","*地球*").boost(10)));
-        SearchResponse response = ESRestClientIndexUtil.search(indexName, type, 0, 100, null, null, "sex", SortOrder.DESC, boolQueryBuilder);
+//        boolQueryBuilder.must(QueryBuilders.boolQuery().should(QueryBuilders.wildcardQuery("intro.keyword","*地球*").boost(10)));
+        SearchResponse response = ESRestClientIndexUtil.search(indexName, type, 0, 100, null, null, "apd", SortOrder.DESC, boolQueryBuilder);
+        indexName = "tm_info_new";
         if (response!=null) {
             for (SearchHit hit : response.getHits().getHits()) {
                 System.out.println(hit.getSourceAsString());
 //                System.out.println(hit.getSourceAsMap());
+//                Map<String, Object> map = hit.getSourceAsMap();
+//
+//                map.put("grp",map.get("grp")==null?null:((String) map.getOrDefault("grp", "")).split(";"));
+//                map.put("grpSim",map.get("grpSim")==null?null:((String) map.getOrDefault("grpSim", "")).split(";"));
+//                map.put("grpSpfw",map.get("grpSpfw")==null?null:((String) map.getOrDefault("grpSpfw", "")).split(";"));
+//                map.put("spdm",map.get("spdm")==null?null:((String) map.getOrDefault("spdm", "")).split(";"));
+//                map.put("hyfl",map.get("hyfl")==null?null:((String) map.getOrDefault("hyfl", "")).split(";"));
+//                map.put("txCc",map.get("txCc")==null?null:((String) map.getOrDefault("txCc", "")).split(";"));
+//                map.put("encid",map.get("encid")==null?null:((String) map.getOrDefault("encid", "")).split(";"));
+//                map.put("cid",map.get("cid")==null?null:((String) map.getOrDefault("cid", "")).split(";"));
+//                map.put("oid",map.get("oid")==null?null:((String) map.getOrDefault("oid", "")).split(";"));
+//                map.put("cncid",map.get("cncid")==null?null:((String) map.getOrDefault("cncid", "")).split(";"));
+//                map.put("rrid",map.get("rrid")==null?null:((String) map.getOrDefault("rrid", "")).split(";"));
+//                ESRestClientIndexUtil.insertDoc(indexName,hit.getId(),map);
             }
         }
     }
     @Test
     public void aggregationsTest(){
-        String indexName = "rest_02";
+        String indexName = "tm_ap_test";
         String type = "type";
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-//        boolQueryBuilder.must(QueryBuilders.boolQuery().should(QueryBuilders.wildcardQuery("descript.keyword","*地球*")));
-//        Map<Object, Long> count = ESRestClientIndexUtil.count(indexName, type, null, false, "apvu", boolQueryBuilder);
-//        Map<String, LinkedHashMap<Object, Long>> count1 = ESRestClientIndexUtil.count(indexName, type, null,  new String[]{"apvu","apad"}, boolQueryBuilder);
+//        boolQueryBuilder.must(QueryBuilders.termQuery("agid","AG19916"));
+        Map<Object, Long> count = ESRestClientIndexUtil.count(indexName, type, 10, null, "ap", boolQueryBuilder);
+        System.out.println("统计结果: " + count);
+        Map<String, LinkedHashMap<Object, Long>> count1 = ESRestClientIndexUtil.count(indexName, type, 20,  new String[]{"ap","apEn"}, boolQueryBuilder);
 //        System.out.println("count:"+count);
-//        System.out.println(count1);
+        System.out.println(count1);
 //        ESRestClientIndexUtil.max(indexName, type, "apvu", boolQueryBuilder);
 //        ESRestClientIndexUtil.min(indexName, type, "apvu", boolQueryBuilder);
 //        ESRestClientIndexUtil.avg(indexName, type, "apvu", boolQueryBuilder);

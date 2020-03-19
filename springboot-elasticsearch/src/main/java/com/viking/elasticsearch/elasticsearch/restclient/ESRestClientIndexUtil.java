@@ -53,7 +53,7 @@ import java.util.concurrent.TimeUnit;
  * Created By Viking on 2020/3/11
  */
 public class ESRestClientIndexUtil {
-    private static List<String> fieldTypes = Arrays.asList("boolean","byte","short","int","integer","float","double","long","string","date","keyword");
+    private static List<String> fieldTypes = Arrays.asList("boolean","byte","short","int","integer","float","double","long","string","date","keyword","text");
 
     /**
      * 创建ES索引
@@ -99,36 +99,21 @@ public class ESRestClientIndexUtil {
             // 创建索引
             CreateIndexRequest request = new CreateIndexRequest(indexName);
             // 配置索引相关的设置
-            request.settings(Settings.builder()/*.putProperties()*/
+            request.settings(Settings.builder()
                     .put("index.number_of_shards", 5)
                     .put("index.number_of_replicas", 0)
                     .put("index.max_result_window",10000000)
-
-//                    .put("index.analysis",new HashMap<>())
-/** "index": {
-    "number_of_shards": "10",
-    "max_result_window": "100000000",
-    "creation_date": "1516940588517",
-    "analysis": {
-      "analyzer": {
-        "uppercase": {
-          "filter": "uppercase",
-          "type": "custom",
-          "tokenizer": "standard"
-        },
-        "my_analyzer": {
-          "tokenizer": "my_tokenizer"
-        }
-      },
-      "tokenizer": {
-        "my_tokenizer": {
-          "pattern": ";",
-          "type": "pattern"
-        }
-      }
-    }
-  }*/
+                    // 配置自定义分词
+                    .put("index.analysis.analyzer.uppercase.filter","uppercase")
+                    .put("index.analysis.analyzer.uppercase.type","custom")
+                    .put("index.analysis.analyzer.uppercase.tokenizer","standard")
+                    .put("index.analysis.analyzer.my_analyzer.tokenizer","my_tokenizer")
+                    .put("index.analysis.tokenizer.my_tokenizer.pattern",";")
+                    .put("index.analysis.tokenizer.my_tokenizer.type","pattern")
             );
+
+            //                    .put("index.analysis",new HashMap<>())
+
             request.mapping(contentBuilder);
             if (!Strings.isNullOrEmpty(alias)) request.alias(new Alias(alias));
             CreateIndexResponse response = RestClientHelper.getClient().indices().create(request, RequestOptions.DEFAULT);
@@ -339,17 +324,18 @@ public class ESRestClientIndexUtil {
         request.setDestVersionType(VersionType.EXTERNAL);
         request.setDestOpType("create");
         request.setSourceBatchSize(10000);// 批量处理文档数量
+        request.setMaxDocs(100000);
 //        request.setSlices(10);
         request.setTimeout(TimeValue.timeValueMinutes(2));
         request.setRefresh(true);// 迁移完成后是否刷新索引
-        request.setTimeout(new TimeValue(100, TimeUnit.SECONDS));
+        request.setTimeout(new TimeValue(500, TimeUnit.SECONDS));
         request.setRemoteInfo(
                 new RemoteInfo(
                         "http", host, port, null,
                         new BytesArray(new MatchAllQueryBuilder().toString()),
                         null, null, Collections.emptyMap(),
-                        new TimeValue(100, TimeUnit.SECONDS),
-                        new TimeValue(100, TimeUnit.SECONDS)
+                        new TimeValue(500, TimeUnit.SECONDS),
+                        new TimeValue(500, TimeUnit.SECONDS)
                 )
         );
 
@@ -408,11 +394,17 @@ public class ESRestClientIndexUtil {
         assertCondition(indexName,type,boolQuery);
         SearchSourceBuilder builder = new SearchSourceBuilder();
         TermsAggregationBuilder aggregation = AggregationBuilders.terms(field).field(field);
+
+        // 解决es聚合查询数据精准度不够的问题：
+        // 方案一：将es索引的分片数设置为1个分片,
+        // 方案二：提高聚合的数量（es默认的是返回10条记录，可设置更大的值能有效提高聚合结果精准度）
+        // 方案三：调大shard_size值
+//        aggregation.shardSize(100);
         if (size != null) aggregation.size(size);
         if (isAsc != null) aggregation.order(BucketOrder.key(isAsc));
         builder.aggregation(aggregation).query(boolQuery);
         SearchRequest searchRequest = new SearchRequest(indexName);
-        searchRequest.types(type);
+//        searchRequest.types(type);
         searchRequest.source(builder);
         try {
             SearchResponse response = RestClientHelper.getClient().search(searchRequest, RequestOptions.DEFAULT);
@@ -441,7 +433,6 @@ public class ESRestClientIndexUtil {
         }
         builder.query(boolQuery);
         SearchRequest searchRequest = new SearchRequest(indexName);
-        searchRequest.types(type);
         searchRequest.source(builder);
         try {
             SearchResponse response = RestClientHelper.getClient().search(searchRequest, RequestOptions.DEFAULT);
