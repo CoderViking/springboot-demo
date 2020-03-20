@@ -1,9 +1,9 @@
-package com.viking.elasticsearch.springbootmybatisplus.service.impl;
+package com.viking.mybatisplus.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.viking.elasticsearch.springbootmybatisplus.entity.Student;
-import com.viking.elasticsearch.springbootmybatisplus.dao.StudentMapper;
-import com.viking.elasticsearch.springbootmybatisplus.service.StudentService;
+import com.viking.mybatisplus.entity.Student;
+import com.viking.mybatisplus.dao.StudentMapper;
+import com.viking.mybatisplus.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -14,7 +14,17 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <boot.version>2.1.4.RELEASE</boot.version>
+        <slf4j-logf4.version>1.7.25</slf4j-logf4.version>
     </properties>
+
+    <modules>
+        <module>springboot-mybatis-plus</module>
+        <module>springboot-web</module>
+        <module>springboot-mq</module>
+        <module>springboot-elasticsearch</module>
+        <module>springboot-security</module>
+    </modules>
+
     <!--管理子工程所有的jar包的版本 方便统一升级和维护-->
     <dependencyManagement>
         <dependencies>
@@ -29,13 +39,27 @@
         </dependencies>
     </dependencyManagement>
 
-    <modules>
-        <module>springboot-mybatis-plus</module>
-        <module>springboot-web</module>
-        <module>springboot-mq</module>
-        <module>springboot-elasticsearch</module>
-        <module>springboot-security</module>
-    </modules>
+    <!--  父工程中配置的依赖，在所有子模块中都能使用  -->
+    <dependencies>
+        <!--  lombok注解  -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j-logf4.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j-logf4.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
 
     <build>
         <plugins>

@@ -1,4 +1,4 @@
-package com.viking.elasticsearch.springbootmybatisplus;
+package com.viking.mybatisplus;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-@MapperScan("com.viking.springbootmybatisplus.dao")
+@MapperScan("com.viking.mybatisplus.dao")
 public class SpringbootMybatisPlusApplication {
 
 	public static void main(String[] args) {
