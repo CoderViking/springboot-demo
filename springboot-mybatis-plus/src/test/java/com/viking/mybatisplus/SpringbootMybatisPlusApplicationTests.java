@@ -1,10 +1,10 @@
-package com.viking.elasticsearch.springbootmybatisplus;
+package com.viking.mybatisplus;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.viking.elasticsearch.springbootmybatisplus.entity.Student;
-import com.viking.elasticsearch.springbootmybatisplus.service.StudentService;
+import com.viking.mybatisplus.entity.Student;
+import com.viking.mybatisplus.service.StudentService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +19,13 @@ public class SpringbootMybatisPlusApplicationTests {
 
 	@Autowired
 	private StudentService service;
+
+	@Test
+	public void testListAll(){
+		List<Student> list = service.list();
+		System.out.println(list);
+	}
+
 	@Test
 	public void contextLoads() {
 		/**
