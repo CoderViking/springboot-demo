@@ -27,10 +27,7 @@ import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.index.VersionType;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MatchAllQueryBuilder;
-import org.elasticsearch.index.reindex.AbstractBulkByScrollRequest;
-import org.elasticsearch.index.reindex.BulkByScrollResponse;
-import org.elasticsearch.index.reindex.ReindexRequest;
-import org.elasticsearch.index.reindex.RemoteInfo;
+import org.elasticsearch.index.reindex.*;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
@@ -239,11 +236,77 @@ public class ESRestClientIndexUtil {
      * @return 是否成功
      */
     public static boolean updateDoc(String indexName, String esId, Map<String, Object> jsonMap){
-        UpdateRequest request = new UpdateRequest(indexName,esId).upsert(jsonMap);
+        UpdateRequest request = new UpdateRequest(indexName,esId).doc(jsonMap);
         try {
             UpdateResponse response = RestClientHelper.getClient().update(request, RequestOptions.DEFAULT);
             System.out.println("状态码:" + response.status().getStatus());
             return Boolean.TRUE;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Boolean.FALSE;
+    }
+    /**
+     * 更新/插入文档
+     * @param indexName 索引名称
+     * @param esId ES的文档存储ID
+     * @param jsonMap 文档对应的字段和值
+     * @return 是否成功
+     */
+    public static boolean upsertDoc(String indexName, String esId, Map<String, Object> jsonMap){
+        UpdateRequest request = new UpdateRequest(indexName,esId).doc(jsonMap).upsert(jsonMap);
+        try {
+            UpdateResponse response = RestClientHelper.getClient().update(request, RequestOptions.DEFAULT);
+            System.out.println("状态码: " + response.status().getStatus());
+            return Boolean.TRUE;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Boolean.FALSE;
+    }
+    public static boolean updateByQuery(String indexName, BoolQueryBuilder queryBuilder){
+        UpdateByQueryRequest request = new UpdateByQueryRequest(indexName);
+//        request.setMaxDocs(10);//最大更新文档数
+//        request.setConflicts("proceed");// 版本冲突后继续执行
+        request.setBatchSize(1000);//批次修改文档数，默认值为1000
+        request.setRefresh(true);//完成后刷新索引
+        request.setQuery(queryBuilder);
+        try {
+            BulkByScrollResponse response = RestClientHelper.getClient().updateByQuery(request, RequestOptions.DEFAULT);
+            boolean timedOut = response.isTimedOut();// 检查请求是否超时
+            long totalDocs = response.getTotal();// 获取处理的文档总数
+            long updatedDocs = response.getUpdated();// 更新的文档数量
+            long deletedDocs = response.getDeleted();// 被删除的文档数量
+            long batches = response.getBatches();// 执行的批数
+            long noops = response.getNoops();// 跳过的文档数量
+            long versionConflicts = response.getVersionConflicts();// 版本冲突数
+            long bulkRetries = response.getBulkRetries();// 请求必须重试批量索引操作的次数
+            long searchRetries = response.getSearchRetries();// 请求重试搜索操作的次数
+            return totalDocs > 0;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return Boolean.FALSE;
+    }
+
+    public Boolean deleteByQuery(String indexName, BoolQueryBuilder queryBuilder){
+        DeleteByQueryRequest request = new DeleteByQueryRequest(indexName);
+//        request.setConflicts("proceed");//版本冲突后继续执行
+        request.setQuery(queryBuilder);
+//        request.setMaxDocs(10);//最大更新文档数
+        request.setBatchSize(1000);//批次修改文档数，默认值为1000
+        request.setRefresh(true);//完成后刷新索引
+        try {
+            BulkByScrollResponse response = RestClientHelper.getClient().deleteByQuery(request, RequestOptions.DEFAULT);
+            boolean timedOut = response.isTimedOut();// 检查请求是否超时
+            long totalDocs = response.getTotal();// 获取处理的文档总数
+            long deletedDocs = response.getDeleted();// 删除的文档数量
+            long batches = response.getBatches();// 执行的批数
+            long noops = response.getNoops();// 跳过的文档数量
+            long bulkRetries = response.getBulkRetries();// 请求必须重试批量索引操作的次数
+            long versionConflicts = response.getVersionConflicts();// 版本冲突数
+            long searchRetries = response.getSearchRetries();// 请求重试搜索操作的次数
+            return totalDocs > 0;
         } catch (IOException e) {
             e.printStackTrace();
         }

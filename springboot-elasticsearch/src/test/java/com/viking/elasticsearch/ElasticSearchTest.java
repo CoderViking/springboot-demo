@@ -39,6 +39,8 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -54,6 +56,7 @@ import java.util.concurrent.TimeUnit;
 public class ElasticSearchTest  {
     private static List<String> fieldTypes = Arrays.asList("boolean","byte","short","int","integer","float","double","long","string","date","keyword","text");
 
+    private static Logger log = LoggerFactory.getLogger(ElasticSearchTest.class);
     /*
     String类型，又分两种：
         text：可分词，不可参与聚合
@@ -131,23 +134,24 @@ public class ElasticSearchTest  {
     @Test
     public void deleteDoc(){
         String indexName = "super_seminary";
-        String esId = "626a86e8-932a-488a-aa46-9dae9e02e573";
+        String esId = "890adc3c-ce73-496d-afda-1029ce438751";
         ESRestClientIndexUtil.deleteDoc(indexName,esId);
     }
     @Test
     public void updateDoc(){
-        String indexName = "";
-        String esId = "";
+        String indexName = "super_seminary";
+        String esId = "890adc3c-ce73-496d-afda-1029ce438750";
         Map<String,Object> jsonMap = new HashMap<>();
-        jsonMap.put("label","修改称号");
+        jsonMap.put("name","葛小伦");
         ESRestClientIndexUtil.updateDoc(indexName,esId,jsonMap);
     }
     @Test
     public void getDoc(){
         String indexName = "super_seminary";
-        String esId = "073e1e3e-22f0-4ab0-b739-87d8358d8d95";
+        String esId = "890adc3c-ce73-496d-afda-1029ce438750";
         Map<String, Object> doc = ESRestClientIndexUtil.getDoc(indexName, esId);
-        System.out.println(doc);
+        log.info(doc.toString());
+//        System.out.println(doc);
     }
     @Test
     public void reIndexTest(){
@@ -282,18 +286,18 @@ public class ElasticSearchTest  {
     }
     @Test
     public void searchTest(){
-        String indexName = "tm_info_new";
+        String indexName = "super_seminary";
         String type = "type";
 
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(QueryBuilders.termQuery("grp","2013"));
+        boolQueryBuilder.must(QueryBuilders.termQuery("name","杜蔷薇"));
 //        boolQueryBuilder.must(QueryBuilders.termQuery("grp","3501"));
 //        boolQueryBuilder.should(QueryBuilders.matchPhraseQuery("ap","瑞萌舒乐工业公司"));
 //        boolQueryBuilder.should(QueryBuilders.matchPhraseQuery("apEn","INDUSTRIAS RAMON SOLER,S.A."));
 //        boolQueryBuilder.minimumShouldMatch(1);
 //        boolQueryBuilder.must(QueryBuilders.matchQuery("subjection","超神学院·地球防卫·雄兵连"));//match暂时无法查询，原因时es的服务器版本和客户端版本不一致，6.0.0的服务器缺少对auto_generate_synonyms_phrase_query的支持
 //        boolQueryBuilder.must(QueryBuilders.boolQuery().should(QueryBuilders.wildcardQuery("intro.keyword","*地球*").boost(10)));
-        SearchResponse response = ESRestClientIndexUtil.search(indexName, type, 0, 100, null, null, "apd", SortOrder.DESC, boolQueryBuilder);
+        SearchResponse response = ESRestClientIndexUtil.search(indexName, type, 0, 100, null, null, "hid", SortOrder.DESC, boolQueryBuilder);
         indexName = "tm_info_new";
         if (response!=null) {
             for (SearchHit hit : response.getHits().getHits()) {
