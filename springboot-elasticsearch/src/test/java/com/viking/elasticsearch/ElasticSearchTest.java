@@ -3,6 +3,7 @@ package com.viking.elasticsearch;
 import com.viking.elasticsearch.config.RestClientHelper;
 import com.viking.elasticsearch.elasticsearch.restclient.ESRestClientIndexUtil;
 import com.viking.elasticsearch.elasticsearch.transportclient.ESTransportClientIndexUtil;
+import com.viking.elasticsearch.entity.SuperSeminary;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.admin.indices.alias.Alias;
 import org.elasticsearch.action.delete.DeleteRequest;
@@ -290,7 +291,7 @@ public class ElasticSearchTest  {
         String type = "type";
 
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(QueryBuilders.termQuery("name","杜蔷薇"));
+        boolQueryBuilder.must(QueryBuilders.termQuery("rank","中士"));
 //        boolQueryBuilder.must(QueryBuilders.termQuery("grp","3501"));
 //        boolQueryBuilder.should(QueryBuilders.matchPhraseQuery("ap","瑞萌舒乐工业公司"));
 //        boolQueryBuilder.should(QueryBuilders.matchPhraseQuery("apEn","INDUSTRIAS RAMON SOLER,S.A."));
@@ -300,8 +301,10 @@ public class ElasticSearchTest  {
         SearchResponse response = ESRestClientIndexUtil.search(indexName, type, 0, 100, null, null, "hid", SortOrder.DESC, boolQueryBuilder);
         indexName = "tm_info_new";
         if (response!=null) {
-            for (SearchHit hit : response.getHits().getHits()) {
-                System.out.println(hit.getSourceAsString());
+            List<SuperSeminary> list = ESRestClientIndexUtil.convert(SuperSeminary.class, response);
+            list.forEach(System.out::println);
+//            for (SearchHit hit : response.getHits().getHits()) {
+//                System.out.println(hit.getSourceAsString());
 //                System.out.println(hit.getSourceAsMap());
 //                Map<String, Object> map = hit.getSourceAsMap();
 //
@@ -317,7 +320,7 @@ public class ElasticSearchTest  {
 //                map.put("cncid",map.get("cncid")==null?null:((String) map.getOrDefault("cncid", "")).split(";"));
 //                map.put("rrid",map.get("rrid")==null?null:((String) map.getOrDefault("rrid", "")).split(";"));
 //                ESRestClientIndexUtil.insertDoc(indexName,hit.getId(),map);
-            }
+//            }
         }
     }
     @Test

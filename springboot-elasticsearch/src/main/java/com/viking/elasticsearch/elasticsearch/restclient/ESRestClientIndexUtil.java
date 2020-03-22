@@ -1,5 +1,6 @@
 package com.viking.elasticsearch.elasticsearch.restclient;
 
+import com.alibaba.fastjson.JSON;
 import com.viking.elasticsearch.config.RestClientHelper;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.DocWriteResponse;
@@ -426,6 +427,20 @@ public class ESRestClientIndexUtil {
         }
         return null;
     }
+
+    /**
+     *
+     * @param indexName
+     * @param type
+     * @param from
+     * @param size
+     * @param fields
+     * @param excludeFields
+     * @param sortField
+     * @param sortOrder
+     * @param boolQuery
+     * @return
+     */
     public static SearchResponse search(@NonNull String indexName, @NonNull String type, @Nullable Integer from,
                                         @Nullable Integer size, @Nullable String[] fields, @Nullable String[] excludeFields,
                                         @Nullable String sortField, @Nullable SortOrder sortOrder, @NonNull BoolQueryBuilder boolQuery){
@@ -452,6 +467,35 @@ public class ESRestClientIndexUtil {
         return null;
     }
 
+    /**
+     *
+     * @param clazz
+     * @param response
+     * @param <T>
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> List<T> convert(Class clazz, SearchResponse response){
+        SearchHit[] hits = response.getHits().getHits();
+        List<T> list = new ArrayList<>();
+        for (SearchHit hit : hits) {
+            Map<String, Object> source = hit.getSourceAsMap();
+            T t = (T) JSON.parseObject(JSON.toJSONString(source), clazz);
+            list.add(t);
+        }
+        return list;
+    }
+
+    /**
+     *
+     * @param indexName
+     * @param type
+     * @param size
+     * @param isAsc
+     * @param field
+     * @param boolQuery
+     * @return
+     */
     public static Map<Object,Long> count(@NonNull String indexName, @NonNull String type,@Nullable Integer size,
                                          @Nullable Boolean isAsc, @NonNull String field, @NonNull BoolQueryBuilder boolQuery){
         assertCondition(indexName,type,boolQuery);
