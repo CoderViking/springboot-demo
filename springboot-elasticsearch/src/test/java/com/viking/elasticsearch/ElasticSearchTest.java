@@ -168,19 +168,19 @@ public class ElasticSearchTest  {
 //        List<Map<String,String>> columnList = Arrays.asList(field1,field2,field3,field4,field5,field6,field7,field8,field9);
 //        ESRestClientIndexUtil.createIndex("new_zq","v1",columnList);
 
-        Map<String,String> field1 = new HashMap<>();field1.put("name","code");field1.put("type","long");// 名称
-        Map<String,String> field2 = new HashMap<>();field2.put("name","firstcode");field2.put("type","long");// 英雄编号
-        Map<String,String> field3 = new HashMap<>();field3.put("name","lvl");field3.put("type","long");// 称号
-        Map<String,String> field4 = new HashMap<>();field4.put("name","city");field4.put("type","keyword");// 性别
-        Map<String,String> field5 = new HashMap<>();field5.put("name","prv");field5.put("type","keyWord");// 军衔
-        Map<String,String> field6 = new HashMap<>();field6.put("name","cty");field6.put("type","keyword");//隶属
-        Map<String,String> field7 = new HashMap<>();field7.put("name","addr");field7.put("type","keyword");// 简介
-        Map<String,String> field8 = new HashMap<>();field8.put("name","type");field8.put("type","keyword");// cp对象
-        Map<String,String> field9 = new HashMap<>();field9.put("name","structure");field9.put("type","keyword");// 神体状态
-        List<Map<String,String>> columnList = Arrays.asList(field1,field2,field3,field4,field5,field6,field7,field8,field9);
-        ESRestClientIndexUtil.createIndex("cn_xz_area","area",columnList);
+//        Map<String,String> field1 = new HashMap<>();field1.put("name","code");field1.put("type","long");// 名称
+//        Map<String,String> field2 = new HashMap<>();field2.put("name","firstcode");field2.put("type","long");// 英雄编号
+//        Map<String,String> field3 = new HashMap<>();field3.put("name","lvl");field3.put("type","long");// 称号
+//        Map<String,String> field4 = new HashMap<>();field4.put("name","city");field4.put("type","keyword");// 性别
+//        Map<String,String> field5 = new HashMap<>();field5.put("name","prv");field5.put("type","keyWord");// 军衔
+//        Map<String,String> field6 = new HashMap<>();field6.put("name","cty");field6.put("type","keyword");//隶属
+//        Map<String,String> field7 = new HashMap<>();field7.put("name","addr");field7.put("type","keyword");// 简介
+//        Map<String,String> field8 = new HashMap<>();field8.put("name","type");field8.put("type","keyword");// cp对象
+//        Map<String,String> field9 = new HashMap<>();field9.put("name","structure");field9.put("type","keyword");// 神体状态
+//        List<Map<String,String>> columnList = Arrays.asList(field1,field2,field3,field4,field5,field6,field7,field8,field9);
+//        ESRestClientIndexUtil.createIndex("cn_xz_area","area",columnList);
 
-        ESRestClientIndexUtil.reIndexDoc(new String[]{"util_area_v1"},"cn_xz_area","172.16.15.150",9200);
+        ESRestClientIndexUtil.reIndexDoc(new String[]{"tm_info"},"tm_info","127.168.1.150",9200);
     }
     @Test
     public void createdAnalyzeIndex(){

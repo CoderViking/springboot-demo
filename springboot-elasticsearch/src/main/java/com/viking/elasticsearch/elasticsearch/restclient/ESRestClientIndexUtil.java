@@ -388,7 +388,7 @@ public class ESRestClientIndexUtil {
         request.setDestVersionType(VersionType.EXTERNAL);
         request.setDestOpType("create");
         request.setSourceBatchSize(10000);// 批量处理文档数量
-        request.setMaxDocs(100000);
+//        request.setMaxDocs(100000);
 //        request.setSlices(10);
         request.setTimeout(TimeValue.timeValueMinutes(2));
         request.setRefresh(true);// 迁移完成后是否刷新索引
@@ -641,5 +641,8 @@ public class ESRestClientIndexUtil {
         Assert.notNull(indexName,"ES索引名称不能为空");
 //        Assert.notNull(type,"ES索引类型不能为空");
         Assert.notNull(boolQuery,"查询条件不能为空");
+    }
+    public static void transportData(){
+
     }
 }

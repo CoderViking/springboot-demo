@@ -6,7 +6,7 @@ server:
 # 使用RestHighLevelClient连接es
 elasticsearch:
 #  host: 172.16.2.212:9200,172.16.2.82:9200
-  host: 192.168.142.128:9200
+  host: 172.17.116.107:9200
 #  es_host: 172.16.2.212:9300,172.16.2.82:9300
   es_host: 172.16.2.212:9300
   cluster_name: ZQZ_Oline
