@@ -1,7 +1,11 @@
 package com.viking.elasticsearch.config;
 
 import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.impl.nio.client.HttpAsyncClientBuilder;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
@@ -20,9 +24,19 @@ import java.util.List;
 @Component
 public class RestClientHelper {
     private static String[] ES_HOST;
+    private static String ES_NAME;
+    private static String ES_PASSWORD;
     @Value("${elasticsearch.host}")
     private void setEsHost(String[] host){
         ES_HOST = host;
+    }
+    @Value("${elasticsearch.name}")
+    private void setEsName(String name){
+        ES_NAME = name;
+    }
+    @Value("${elasticsearch.password}")
+    private void setEsPassword(String password){
+        ES_PASSWORD = password;
     }
 
     private RestClientHelper(){}
@@ -60,7 +74,7 @@ public class RestClientHelper {
                 builder.setConnectTimeout(30000)// 更改客户端的连接超时时间默认1秒现在改为30秒
                         .setSocketTimeout(20601000);//更改客户端的socket连接超时限制默认30秒现在改为20分钟
                 return builder;
-            }));
+            })/*.setHttpClientConfigCallback(httpClientBuilder -> httpClientBuilder.setDefaultCredentialsProvider(createCredentials()))*/);// 需要通过账号密码访问时，取消注释即可
         }
         private RestHighLevelClient getInstance(){
             return client;
@@ -86,4 +100,11 @@ public class RestClientHelper {
         System.out.println("=============ES客户端初始化完成~"+ list);
         return list.toArray(result);
     }
+    // 配置访问ES的账号密码凭证
+    private static CredentialsProvider createCredentials(){
+        BasicCredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+        credentialsProvider.setCredentials(AuthScope.ANY, new UsernamePasswordCredentials(ES_NAME, ES_PASSWORD));
+        return credentialsProvider;
+    }
+
 }

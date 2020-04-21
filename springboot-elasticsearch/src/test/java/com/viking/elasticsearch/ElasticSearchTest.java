@@ -4,6 +4,7 @@ import com.viking.elasticsearch.config.RestClientHelper;
 import com.viking.elasticsearch.elasticsearch.restclient.ESRestClientIndexUtil;
 import com.viking.elasticsearch.elasticsearch.transportclient.ESTransportClientIndexUtil;
 import com.viking.elasticsearch.entity.SuperSeminary;
+import org.apache.lucene.search.TotalHits;
 import org.elasticsearch.action.ActionListener;
 import org.elasticsearch.action.admin.indices.alias.Alias;
 import org.elasticsearch.action.delete.DeleteRequest;
@@ -77,7 +78,7 @@ public class ElasticSearchTest  {
     }
     @Test
     public void shrinkIndex(){
-        ESRestClientIndexUtil.shrinkIndex("area_copy","cn_xz_area");
+//        ESRestClientIndexUtil.shrinkIndex("area_copy","cn_xz_area");
     }
     @Test
     public void createIndex(){
@@ -179,8 +180,8 @@ public class ElasticSearchTest  {
 //        Map<String,String> field9 = new HashMap<>();field9.put("name","structure");field9.put("type","keyword");// 神体状态
 //        List<Map<String,String>> columnList = Arrays.asList(field1,field2,field3,field4,field5,field6,field7,field8,field9);
 //        ESRestClientIndexUtil.createIndex("cn_xz_area","area",columnList);
-
-        ESRestClientIndexUtil.reIndexDoc(new String[]{"tm_info"},"tm_info","127.168.1.150",9200);
+        ESRestClientIndexUtil.updateIndexSetting("tm_v2");
+        ESRestClientIndexUtil.reIndexDoc(new String[]{"tm_v2"},"tm_v2","172.16.15.150",9200);
     }
     @Test
     public void createdAnalyzeIndex(){
@@ -274,7 +275,7 @@ public class ElasticSearchTest  {
 //        }
 
 
-        ESRestClientIndexUtil.reIndexDoc(new String[]{"tm_info"},"tm_info","172.16.15.150",9200);
+        ESRestClientIndexUtil.reIndexDoc(new String[]{"tm_v2"},"tm_info","172.16.15.150",9200);
     }
     @Test
     public void getTest(){
@@ -287,20 +288,24 @@ public class ElasticSearchTest  {
     }
     @Test
     public void searchTest(){
-        String indexName = "super_seminary";
+        String indexName = "tm_info";
         String type = "type";
 
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(QueryBuilders.termQuery("rank","中士"));
+        boolQueryBuilder.must(QueryBuilders.termQuery("grp","1201"));
 //        boolQueryBuilder.must(QueryBuilders.termQuery("grp","3501"));
 //        boolQueryBuilder.should(QueryBuilders.matchPhraseQuery("ap","瑞萌舒乐工业公司"));
 //        boolQueryBuilder.should(QueryBuilders.matchPhraseQuery("apEn","INDUSTRIAS RAMON SOLER,S.A."));
 //        boolQueryBuilder.minimumShouldMatch(1);
 //        boolQueryBuilder.must(QueryBuilders.matchQuery("subjection","超神学院·地球防卫·雄兵连"));//match暂时无法查询，原因时es的服务器版本和客户端版本不一致，6.0.0的服务器缺少对auto_generate_synonyms_phrase_query的支持
 //        boolQueryBuilder.must(QueryBuilders.boolQuery().should(QueryBuilders.wildcardQuery("intro.keyword","*地球*").boost(10)));
-        SearchResponse response = ESRestClientIndexUtil.search(indexName, type, 0, 100, null, null, "hid", SortOrder.DESC, boolQueryBuilder);
+        SearchResponse response = ESRestClientIndexUtil.search(indexName, type, 0, 100, null, null, "vu", SortOrder.DESC, boolQueryBuilder);
         indexName = "tm_info_new";
         if (response!=null) {
+            long total = response.getHits().getTotalHits().value;
+            TotalHits.Relation relation = response.getHits().getTotalHits().relation;
+            System.out.println(relation.name());
+            System.out.println("总计查询结果数:" + total);
             List<SuperSeminary> list = ESRestClientIndexUtil.convert(SuperSeminary.class, response);
             list.forEach(System.out::println);
 //            for (SearchHit hit : response.getHits().getHits()) {

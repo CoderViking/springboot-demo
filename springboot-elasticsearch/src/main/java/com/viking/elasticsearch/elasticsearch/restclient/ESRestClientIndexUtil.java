@@ -7,6 +7,7 @@ import org.elasticsearch.action.DocWriteResponse;
 import org.elasticsearch.action.admin.indices.alias.Alias;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.admin.indices.settings.put.UpdateSettingsRequest;
+import org.elasticsearch.action.admin.indices.shrink.ResizeRequest;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.*;
@@ -153,7 +154,8 @@ public class ESRestClientIndexUtil {
      */
     public static boolean updateIndexSetting(String indexName){
         UpdateSettingsRequest request = new UpdateSettingsRequest(indexName);
-        request.settings(Settings.builder().put("index.blocks.write",true));
+//        request.settings(Settings.builder().put("index.blocks.write",true));
+        request.settings(Settings.builder().put("refresh_interval",-1));
         try {
             AcknowledgedResponse response = RestClientHelper.getClient().indices().putSettings(request, RequestOptions.DEFAULT);
             System.out.println("修改索引设置是否操作成功？" + response.isAcknowledged());
@@ -171,22 +173,22 @@ public class ESRestClientIndexUtil {
      * @param sourceIndex 原始索引
      * @return 是否操作成功
      */
-    public static boolean shrinkIndex(String targetIndex, String sourceIndex){
-        updateIndexSetting(sourceIndex);
-        ResizeRequest request = new ResizeRequest(targetIndex, sourceIndex);
-        request.setSettings(Settings.builder()
-                .put("index.number_of_shards",5)
-                .put("index.number_of_replicas", 0)
-                .build());
-        try {
-            ResizeResponse response = RestClientHelper.getClient().indices().shrink(request, RequestOptions.DEFAULT);
-            boolean success = response.isAcknowledged();
-            System.out.println("缩小索引操作是否成功?" + success);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return Boolean.TRUE;
-    }
+//    public static boolean shrinkIndex(String targetIndex, String sourceIndex){
+//        updateIndexSetting(sourceIndex);
+//        ResizeRequest request = new ResizeRequest(targetIndex, sourceIndex);
+//        request.setSettings(Settings.builder()
+//                .put("index.number_of_shards",5)
+//                .put("index.number_of_replicas", 0)
+//                .build());
+//        try {
+//            ResizeResponse response = RestClientHelper.getClient().indices().shrink(request, RequestOptions.DEFAULT);
+//            boolean success = response.isAcknowledged();
+//            System.out.println("缩小索引操作是否成功?" + success);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return Boolean.TRUE;
+//    }
 
     /**
      * 插入文档
@@ -388,8 +390,8 @@ public class ESRestClientIndexUtil {
         request.setDestVersionType(VersionType.EXTERNAL);
         request.setDestOpType("create");
         request.setSourceBatchSize(10000);// 批量处理文档数量
-//        request.setMaxDocs(100000);
-//        request.setSlices(10);
+        request.setMaxDocs(100000000);
+        request.setSlices(10);
         request.setTimeout(TimeValue.timeValueMinutes(2));
         request.setRefresh(true);// 迁移完成后是否刷新索引
         request.setTimeout(new TimeValue(500, TimeUnit.SECONDS));
@@ -450,7 +452,9 @@ public class ESRestClientIndexUtil {
         if (size != null) builder.size(size);
         builder.fetchSource(fields,excludeFields);
         if (!Strings.isNullOrEmpty(sortField) && sortOrder != null) builder.sort(sortField,sortOrder);
+        builder.trackTotalHits(false);// 是否返回精确的文档匹配数（默认是不返回精确的匹配数的）
         builder.query(boolQuery);
+
         SearchRequest searchRequest = new SearchRequest(indexName);
         searchRequest.source(builder);
         try {
