@@ -181,4 +181,15 @@ public class SpringbootMybatisPlusApplicationTests {
 		result.put("studentPage",page);
 		System.out.println(result);
 	}
+	@Test
+	public void testCustomQuerySql(){
+		QueryWrapper<Student> queryWrapper = new QueryWrapper<>();
+		Page<Student> page = new Page<>();
+		page.setCurrent(2);
+		page.setSize(5);
+		queryWrapper.lambda().ge(Student::getAge, 15);
+		queryWrapper.lambda().orderByAsc(Student::getId);
+		page = service.selectPageByCustomSql(page, queryWrapper);
+		System.out.println(page.getRecords());
+	}
 }

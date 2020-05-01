@@ -1,5 +1,8 @@
 package com.viking.mybatisplus.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.viking.mybatisplus.entity.Student;
 import com.viking.mybatisplus.dao.StudentMapper;
@@ -25,5 +28,10 @@ public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> impl
     @Override
     public Student getStudentById(Long id){
         return mapper.selectById(id);
+    }
+
+    @Override
+    public Page<Student> selectPageByCustomSql(IPage<Student> page, QueryWrapper<Student> queryWrapper) {
+        return mapper.selectPageByCustomSql(page,queryWrapper);
     }
 }
