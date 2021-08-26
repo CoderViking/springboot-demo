@@ -1,6 +1,6 @@
 package com.viking.elasticsearch.springbootweb.controller.mq;
 
-import com.viking.elasticsearch.springbootmq.hello.Hello;
+//import com.viking.elasticsearch.springbootmq.hello.Hello;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/mq")
 public class HelloController {
 
-    @RequestMapping("/")
-    public String sayHello(){
-        Hello hello = new Hello();
-        hello.say = "Hello springboot-MQ~";
-        return hello.toString();
-    }
+//    @RequestMapping("/")
+//    public String sayHello(){
+//        Hello hello = new Hello();
+//        hello.say = "Hello springboot-MQ~";
+//        return hello.toString();
+//    }
 }
