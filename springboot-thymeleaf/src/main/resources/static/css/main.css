@@ -1,0 +1,9 @@
+.formBox{
+    position:fixed;
+    overflow:hidden;
+    border: 1px;
+    margin: 3px;
+    padding: 3px;
+    width: auto;
+    height: auto;
+}

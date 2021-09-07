@@ -23,6 +23,7 @@
         <module>springboot-mq</module>
         <module>springboot-elasticsearch</module>
         <module>springboot-security</module>
+        <module>springboot-thymeleaf</module>
     </modules>
 
     <!--管理子工程所有的jar包的版本 方便统一升级和维护-->
