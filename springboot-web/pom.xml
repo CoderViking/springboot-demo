@@ -20,11 +20,11 @@
 
     <dependencies>
         <!-- 引入springboot-mq的依赖 -->
-        <dependency>
-            <groupId>com.viking</groupId>
-            <artifactId>springboot-mq</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.viking</groupId>-->
+<!--            <artifactId>springboot-mq</artifactId>-->
+<!--            <version>0.0.1-SNAPSHOT</version>-->
+<!--        </dependency>-->
         <!-- 引入springboot-mybatis-plus的依赖 -->
         <!--<dependency>-->
             <!--<groupId>com.viking</groupId>-->
