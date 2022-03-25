@@ -1,0 +1,34 @@
+
+
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/webspider?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.jdbc.Driver
+    name: root
+    password: 1234
+    hikari:
+      connection-test-query: select 1
+      connection-timeout: 30000
+      maximum-pool-size: 20
+      max-lifetime: 600000
+      idle-timeout: 540000
+      minimum-idle: 10
+
+# mybatis plus mapper文件路径
+mybatis-plus:
+  mapperLocations: classpath:/mapper/**/*.xml
+  # mybatis plus 实体类路径
+  typeAliasesPackage: com.viking.shiro.**.entity/*
+  configuration:
+    log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
+
+logging:
+  file:
+    #    日志输出文件目录
+    name: /opt//update/logs/update.log
+    #    name: opt//update//update.log
+    max-history: 30
+  level:
+    # com.ipdtfc.update.mapper 该包打印DEBUG级别日志
+    com.ipdtfc.update.mapper: debug
