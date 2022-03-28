@@ -15,6 +15,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <boot.version>2.1.4.RELEASE</boot.version>
         <fastjson.version>1.2.62</fastjson.version>
+        <junit.version>4.13.2</junit.version>
         <shiro.version>1.4.2</shiro.version>
     </properties>
 
@@ -26,6 +27,7 @@
         <module>springboot-security</module>
         <module>springboot-thymeleaf</module>
         <module>springboot-redis</module>
+        <module>springboot-web-flux</module>
     </modules>
 
     <!--管理子工程所有的jar包的版本 方便统一升级和维护-->
@@ -101,7 +103,12 @@
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
