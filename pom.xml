@@ -28,6 +28,7 @@
         <module>springboot-elasticsearch</module>
         <module>springboot-redis</module>
         <module>springboot-security</module>
+        <module>springboot-shiro</module>
         <module>springboot-thymeleaf</module>
         <module>springboot-redis</module>
         <module>springboot-web-flux</module>
