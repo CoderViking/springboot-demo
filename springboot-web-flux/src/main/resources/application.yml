@@ -1,0 +1,15 @@
+server:
+  port: 8088
+
+spring:
+  boot:
+    admin:
+      client:
+        url: http://localhost:9000
+        instance:
+          name: springboot-web-flux
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

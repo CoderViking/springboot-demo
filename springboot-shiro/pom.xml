@@ -7,30 +7,13 @@
         <artifactId>springboot-demo</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-
-    <name>springboot-web</name>
-    <artifactId>springboot-web</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-
-    <description>Web服务</description>
-
+    <artifactId>springboot-shiro</artifactId>
+    <name>springboot-shiro</name>
+    <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
-
     <dependencies>
-        <!-- 引入springboot-mq的依赖 -->
-<!--        <dependency>-->
-<!--            <groupId>com.viking</groupId>-->
-<!--            <artifactId>springboot-mq</artifactId>-->
-<!--            <version>0.0.1-SNAPSHOT</version>-->
-<!--        </dependency>-->
-        <!-- 引入springboot-mybatis-plus的依赖 -->
-        <!--<dependency>-->
-            <!--<groupId>com.viking</groupId>-->
-            <!--<artifactId>springboot-mybatis-plus</artifactId>-->
-            <!--<version>0.0.1-SNAPSHOT</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -41,26 +24,49 @@
             <version>5.1.47</version>
             <scope>runtime</scope>
         </dependency>
-        <dependency><!--阿里巴巴Druid连接池-->
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.1.16</version>
-        </dependency>
         <dependency><!-- mybatis-plus -->
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.2.0</version>
         </dependency>
         <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+        </dependency>
+        <!--io常用工具类 -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <!--文件上传工具类 -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+        </dependency>
+        <!--Shiro核心框架 -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-core</artifactId>
+        </dependency>
+        <!-- Shiro使用Srping框架 -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+        </dependency>
+        <!-- Shiro使用EhCache缓存框架 -->
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-ehcache</artifactId>
+        </dependency>
+        <!-- thymeleaf模板引擎和shiro框架的整合 -->
+        <dependency>
+            <groupId>com.github.theborakompanioni</groupId>
+            <artifactId>thymeleaf-extras-shiro</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <!-- 中文分词器 -->
-        <dependency>
-            <groupId>org.ansj</groupId>
-            <artifactId>ansj_seg</artifactId>
-            <version>5.1.6</version>
         </dependency>
     </dependencies>
 
