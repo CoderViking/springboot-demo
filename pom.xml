@@ -22,6 +22,7 @@
         <module>springboot-web</module>
         <module>springboot-mq</module>
         <module>springboot-elasticsearch</module>
+        <module>springboot-redis</module>
         <module>springboot-security</module>
         <module>springboot-thymeleaf</module>
     </modules>
