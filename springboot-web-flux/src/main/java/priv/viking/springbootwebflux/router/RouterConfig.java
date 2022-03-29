@@ -17,6 +17,7 @@ import priv.viking.springbootwebflux.handler.PersonHandler;
 @Configuration
 public class RouterConfig {
 
+    // 对标@Controller、@RequestMapping等标准的Spring MVC注解，提供一套函数式风格的API，用于创建Router、Handler和Filter
     @Bean
     public  RouterFunction<ServerResponse> routerFunction(PersonHandler handler){
         return RouterFunctions.route()
