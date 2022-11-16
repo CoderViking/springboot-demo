@@ -36,4 +36,6 @@ public class JWTConfig {
     public static void setAntMatchers(String antMatchers) {
         JWTConfig.antMatchers = antMatchers;
     }
+
+
 }
